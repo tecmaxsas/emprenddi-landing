@@ -26,8 +26,14 @@ header a, footer a, nav a {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
   }
+  /* IMPORTANTE: NO ponemos bg/color al body aqui porque global.css se incluye
+     tambien en el customCss de Starlight (/docs/*), y un bg-white forzado
+     pisa el fondo oscuro de Starlight en modo Oscuro, dejando texto claro
+     sobre fondo claro = invisible.
+     El color y fondo del body se aplica solo en el Base layout de la landing,
+     no globalmente. Starlight maneja su propio bg/color via sus variables CSS. */
   body {
-    @apply bg-white text-slate-900 font-sans antialiased;
+    @apply font-sans antialiased;
   }
 }
 
