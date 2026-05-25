@@ -10,6 +10,15 @@
   body {
     @apply bg-white text-slate-900 font-sans antialiased;
   }
+  /* Reset minimo — applyBaseStyles:false en la integracion Tailwind desactiva
+     el preflight global, asi que reponemos lo esencial para que la navbar/footer
+     no muestren bullets nativos del <ul>. No afecta al sidebar/contenido de
+     Starlight porque su CSS tiene mayor especificidad. */
+  ul, ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
 }
 
 @layer components {

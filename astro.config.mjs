@@ -9,6 +9,8 @@ export default defineConfig({
     // Starlight monta el centro de ayuda en /docs/* con su propio layout
     // (sidebar, search, dark mode). Convive con la landing en /, /precios,
     // /blog, etc. — no las afecta.
+    // Para que las paginas vivan en /docs/* (no en root), todo el contenido
+    // esta en src/content/docs/docs/* — Starlight respeta esa jerarquia.
     starlight({
       title: 'Centro de Ayuda Emprenddi',
       description: 'Documentación completa: cómo usar Emprenddi paso a paso.',
@@ -44,69 +46,71 @@ export default defineConfig({
       },
       lastUpdated: true,
       pagination: true,
-      // Sidebar: estructura jerárquica
+      // Sidebar: estructura jerárquica.
+      // Los slugs estan relativos a src/content/docs/ — como el contenido vive
+      // en src/content/docs/docs/*, las URLs resultantes son /docs/*.
       sidebar: [
         {
           label: 'Bienvenida',
           items: [
-            { label: 'Inicio', slug: 'index' },
-            { label: 'Qué es Emprenddi', slug: 'que-es' },
+            { label: 'Inicio', slug: 'docs' },
+            { label: 'Qué es Emprenddi', slug: 'docs/que-es' },
           ],
         },
         {
           label: 'Primeros pasos',
           collapsed: false,
-          autogenerate: { directory: 'primeros-pasos' },
+          autogenerate: { directory: 'docs/primeros-pasos' },
         },
         {
           label: 'Ventas',
           collapsed: true,
-          autogenerate: { directory: 'ventas' },
+          autogenerate: { directory: 'docs/ventas' },
         },
         {
           label: 'Compras',
           collapsed: true,
-          autogenerate: { directory: 'compras' },
+          autogenerate: { directory: 'docs/compras' },
         },
         {
           label: 'Inventario',
           collapsed: true,
-          autogenerate: { directory: 'inventario' },
+          autogenerate: { directory: 'docs/inventario' },
         },
         {
           label: 'Contabilidad',
           collapsed: true,
-          autogenerate: { directory: 'contabilidad' },
+          autogenerate: { directory: 'docs/contabilidad' },
         },
         {
           label: 'Nómina',
           collapsed: true,
-          autogenerate: { directory: 'nomina' },
+          autogenerate: { directory: 'docs/nomina' },
         },
         {
           label: 'Garantías',
           collapsed: true,
-          autogenerate: { directory: 'garantias' },
+          autogenerate: { directory: 'docs/garantias' },
         },
         {
           label: 'Restaurante',
           collapsed: true,
-          autogenerate: { directory: 'restaurante' },
+          autogenerate: { directory: 'docs/restaurante' },
         },
         {
           label: 'DIAN',
           collapsed: true,
-          autogenerate: { directory: 'dian' },
+          autogenerate: { directory: 'docs/dian' },
         },
         {
           label: 'Administración',
           collapsed: true,
-          autogenerate: { directory: 'administracion' },
+          autogenerate: { directory: 'docs/administracion' },
         },
         {
           label: 'Ayuda',
           collapsed: true,
-          autogenerate: { directory: 'ayuda' },
+          autogenerate: { directory: 'docs/ayuda' },
         },
       ],
     }),
