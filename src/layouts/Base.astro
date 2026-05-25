@@ -63,14 +63,24 @@ const orgSchema = {
       url: SITE_URL,
       logo: SITE_URL + '/logos/logo_emprenddi.png',
       sameAs: [],
-      contactPoint: {
-        '@type': 'ContactPoint',
-        telephone: '+57-314-440-5766',
-        contactType: 'sales',
-        email: 'comercial@emprenddi.com',
-        areaServed: 'CO',
-        availableLanguage: 'Spanish',
-      },
+      contactPoint: [
+        {
+          '@type': 'ContactPoint',
+          telephone: '+57-314-440-5766',
+          contactType: 'sales',
+          email: 'comercial@emprenddi.com',
+          areaServed: 'CO',
+          availableLanguage: 'Spanish',
+        },
+        {
+          '@type': 'ContactPoint',
+          telephone: '+57-324-641-5947',
+          contactType: 'technical support',
+          email: 'comercial@emprenddi.com',
+          areaServed: 'CO',
+          availableLanguage: 'Spanish',
+        },
+      ],
       address: {
         '@type': 'PostalAddress',
         streetAddress: 'Carrera 15 #78 - 33, Local 2-255 / 2-211, Unilago',

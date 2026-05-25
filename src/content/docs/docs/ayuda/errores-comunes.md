@@ -205,7 +205,9 @@ Ver guía detallada en [Impresoras y QZ Tray](/docs/administracion/impresoras-qz
 
 ## Si nada funciona
 
-Contacta a soporte. WhatsApp **+57 314 440 5766** o email **comercial@emprenddi.com**.
+Contacta a **Soporte Técnico**: WhatsApp **+57 324 641 5947** (línea exclusiva de soporte para clientes activos) o email **comercial@emprenddi.com**.
+
+> Para temas comerciales (cotizaciones, demos, nuevas sedes), usa la línea de **Ventas**: **+57 314 440 5766**.
 
 Cuando contactes, incluye:
 - Tu razón social (o NIT)

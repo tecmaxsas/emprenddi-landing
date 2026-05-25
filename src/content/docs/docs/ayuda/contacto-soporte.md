@@ -9,19 +9,29 @@ Si no encuentras lo que necesitas en esta documentación, estamos para ayudarte.
 
 ## Canales de contacto
 
-### WhatsApp (recomendado)
+Tenemos **dos líneas de WhatsApp** separadas según el motivo de tu contacto. Usar la correcta hace que la respuesta sea más rápida.
+
+### 🛠 WhatsApp Soporte Técnico (clientes activos)
+
+📱 **+57 324 641 5947**
+
+[Abrir chat de soporte](https://wa.me/573246415947?text=Hola,%20necesito%20soporte%20con%20Emprenddi)
+
+**Para qué sirve**: errores del sistema, no puedes facturar, ayuda con configuraciones, dudas operativas, recuperación de cuenta, problemas con DIAN, capacitación adicional. Es el canal de tu equipo técnico que ya conoce tu cuenta.
+
+### 💬 WhatsApp Ventas y Demos
 
 📱 **+57 314 440 5766**
 
-[Abrir chat directo](https://wa.me/573144405766?text=Hola,%20necesito%20soporte%20con%20Emprenddi)
+[Abrir chat comercial](https://wa.me/573144405766?text=Hola,%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Emprenddi)
 
-Es el canal más rápido. Respondemos en horario hábil normalmente en minutos.
+**Para qué sirve**: cotizaciones, demos para tu negocio, agregar sedes o módulos, renovaciones, alianzas comerciales, preguntas de precios. Es el canal comercial — no para reportes de errores.
 
-### Email
+### 📧 Email
 
 📧 **comercial@emprenddi.com**
 
-Para consultas no urgentes, propuestas, facturación, alianzas comerciales.
+Para consultas no urgentes, propuestas formales, facturación a Tecmax SAS, alianzas comerciales o reclamos formales (PQRSF).
 
 ### Oficina física
 
@@ -42,17 +52,17 @@ Para reuniones presenciales, agenda cita previa por WhatsApp.
 
 Fuera de horario respondemos a primera hora del siguiente día hábil.
 
-**Emergencias críticas** (sistema caído, no puedes facturar): WhatsApp 24/7. Te respondemos lo más rápido posible.
+**Emergencias críticas** (sistema caído, no puedes facturar): escribe al WhatsApp de Soporte Técnico (**+57 324 641 5947**) — atendemos 24/7 para incidencias bloqueantes.
 
 ## Tipos de solicitud
 
 ### 🔴 Urgente (sistema caído, no puedo facturar)
 
-WhatsApp inmediato. Marcamos la solicitud como prioritaria.
+WhatsApp Soporte Técnico **+57 324 641 5947** — inmediato. Marcamos la solicitud como prioritaria.
 
 ### 🟡 Soporte normal (cómo hago X, no entiendo Y)
 
-WhatsApp o email. Respuesta típica en menos de 1 hora hábil.
+WhatsApp Soporte Técnico **+57 324 641 5947** o email. Respuesta típica en menos de 1 hora hábil.
 
 ### 🟢 Solicitud de mejora / feature request
 
@@ -60,7 +70,11 @@ Email a comercial@emprenddi.com con asunto "Mejora propuesta". Evaluamos y agreg
 
 ### 🔵 Capacitación / onboarding
 
-WhatsApp para agendar sesión. Incluida en el plan, sin costo adicional.
+WhatsApp Ventas **+57 314 440 5766** para agendar sesión. Incluida en el plan, sin costo adicional.
+
+### 💼 Cotización / Demo / Renovación
+
+WhatsApp Ventas **+57 314 440 5766** o email.
 
 ## Cómo reportar un error correctamente
 
@@ -88,7 +102,7 @@ Si estás arrancando:
 5. **Acompañamiento DIAN** (gestión resoluciones, habilitación, primeras facturas)
 6. **Acompañamiento contador** (PUC, parametrización fiscal)
 
-Todo incluido en el plan. Agenda con WhatsApp.
+Todo incluido en el plan. Agenda con WhatsApp Ventas **+57 314 440 5766** (onboarding) o Soporte **+57 324 641 5947** (capacitaciones posteriores).
 
 ## Capacitación continua
 
@@ -105,7 +119,7 @@ Si quieres saber si hay caídas activas o mantenimientos programados:
 
 🟢 **Status page**: status.emprenddi.com (próximamente)
 
-Mientras tanto, WhatsApp para preguntar estado.
+Mientras tanto, WhatsApp Soporte **+57 324 641 5947** para preguntar estado.
 
 ## Comunidad
 

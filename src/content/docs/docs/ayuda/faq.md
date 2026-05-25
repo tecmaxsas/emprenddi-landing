@@ -185,7 +185,13 @@ Sí, incluida en el plan. Hacemos onboarding con tu equipo (POS, contabilidad, c
 
 ### ¿Cómo contacto soporte?
 
-WhatsApp +57 314 440 5766, email comercial@emprenddi.com. Horario: lunes a viernes 8am-6pm, sábados 9am-2pm. [Más info](/docs/ayuda/contacto-soporte/).
+Tenemos dos líneas separadas:
+
+- **🛠 Soporte Técnico** (clientes activos, errores, dudas operativas): WhatsApp **+57 324 641 5947**
+- **💬 Ventas / Demos** (nuevos clientes, cotizaciones, renovaciones): WhatsApp **+57 314 440 5766**
+- 📧 Email general: **comercial@emprenddi.com**
+
+Horario: lunes a viernes 8 a.m. - 6 p.m., sábados 9 a.m. - 2 p.m. [Más info](/docs/ayuda/contacto-soporte/).
 
 ### ¿Tienen comunidad de usuarios?
 

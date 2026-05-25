@@ -86,7 +86,7 @@ Sí. Crear la cuenta no tiene costo. La activación del plan se coordina con tu 
 Sí, desde Configuraciones → Empresa. Pero ten cuidado: si ya emitiste facturas con esos datos, las facturas antiguas quedan con la información original.
 
 **¿Qué pasa si me equivoco al registrarme?**
-Contacta a soporte: [comercial@emprenddi.com](mailto:comercial@emprenddi.com) o WhatsApp [+57 314 440 5766](https://wa.me/573144405766). Podemos corregir o reiniciar la cuenta.
+Contacta a Soporte Técnico: [comercial@emprenddi.com](mailto:comercial@emprenddi.com) o WhatsApp Soporte [+57 324 641 5947](https://wa.me/573246415947). Podemos corregir o reiniciar la cuenta.
 
 **¿Puedo tener varias empresas con un mismo email?**
 No. Cada email solo puede ser administrador de una empresa. Si manejas varias, usa un email por empresa (ej. `juan+empresa1@email.com`, `juan+empresa2@email.com`).
