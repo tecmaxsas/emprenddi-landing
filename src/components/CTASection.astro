@@ -1,0 +1,40 @@
+---
+const APP_URL = 'https://pos.emprenddi.com/app';
+---
+
+<section class="py-20 sm:py-28">
+  <div class="container-narrow">
+    <div class="relative overflow-hidden rounded-3xl bg-hero-gradient p-10 sm:p-16 text-white text-center">
+      <!-- Blobs -->
+      <div class="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl opacity-20 bg-white pointer-events-none"
+           style="transform: translate(40%, -40%);"></div>
+      <div class="absolute bottom-0 left-0 w-80 h-80 rounded-full blur-3xl opacity-15 bg-accent-500 pointer-events-none"
+           style="transform: translate(-40%, 40%);"></div>
+
+      <div class="relative">
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight max-w-3xl mx-auto">
+          Empieza a vender hoy mismo.<br />
+          <span class="bg-gradient-to-r from-amber-300 to-pink-300 bg-clip-text text-transparent">
+            30 días gratis, sin tarjeta.
+          </span>
+        </h2>
+        <p class="mt-5 text-lg text-white/90 max-w-2xl mx-auto leading-relaxed">
+          Crea tu cuenta en 60 segundos. El sistema te configura el Plan de Cuentas,
+          los impuestos y todo lo necesario. Tú solo te concentras en vender.
+        </p>
+
+        <div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
+          <a href={APP_URL + '/register'} class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-white hover:bg-slate-50 text-brand-700 font-bold text-base shadow-2xl transition-all duration-200">
+            Crear cuenta gratis
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+          <a href="mailto:comercial@emprenddi.com" class="btn-outline justify-center">
+            Agendar demo
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

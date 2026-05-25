@@ -1,0 +1,361 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import FeatureCard from '../components/FeatureCard.astro';
+import UseCaseCard from '../components/UseCaseCard.astro';
+import FAQItem from '../components/FAQItem.astro';
+import CTASection from '../components/CTASection.astro';
+
+// ============ FEATURES ============
+const features = [
+  {
+    icon: '🛒',
+    title: 'Vende sin complicaciones',
+    accent: 'brand' as const,
+    items: [
+      'POS moderno con pantalla táctil y lector de barras',
+      'Descuentos por línea o globales con aprobación supervisor',
+      'Impresión automática de ticket térmico',
+      'Pagos: efectivo, tarjeta, transferencia, PSE, mixto',
+      'Sesiones de caja con cuadre al cierre',
+    ],
+  },
+  {
+    icon: '📦',
+    title: 'Inventario en tiempo real',
+    accent: 'emerald' as const,
+    items: [
+      'Stock por sede o bodega independiente',
+      'Promedio ponderado automático',
+      'Ajustes, transferencias y aperturas',
+      'Alertas de stock bajo',
+      'Kardex completo por producto',
+    ],
+  },
+  {
+    icon: '💼',
+    title: 'Contabilidad automática',
+    accent: 'purple' as const,
+    items: [
+      'Plan de Cuentas colombiano ya configurado',
+      'Asientos generados solos en cada venta y compra',
+      'Libros oficiales DIAN (Diario, Mayor, Auxiliar, Balance)',
+      'Cierre de mes con bloqueo de ediciones',
+      'Conciliación bancaria y centros de costo',
+    ],
+  },
+  {
+    icon: '📑',
+    title: 'Facturación DIAN integrada',
+    accent: 'brand' as const,
+    items: [
+      'Factura electrónica DIAN según norma',
+      'Notas crédito y débito electrónicas',
+      'Documento equivalente POS para venta minorista',
+      'Documento soporte para compras a no responsables',
+      '<strong>Información exógena</strong> anual generada automáticamente',
+    ],
+  },
+  {
+    icon: '🛠️',
+    title: 'Compras y proveedores',
+    accent: 'amber' as const,
+    items: [
+      'Factura de compra → asiento + inventario en un clic',
+      'Pagos parciales o totales con conciliación',
+      'Cuentas por pagar al día con alertas',
+      'Devoluciones a proveedor con asiento de reversa',
+    ],
+  },
+  {
+    icon: '👥',
+    title: 'Nómina y empleados',
+    accent: 'rose' as const,
+    items: [
+      'Contratos: indefinido, fijo, obra labor, aprendizaje',
+      'Parámetros legales vigentes (SMLMV, UVT)',
+      'Liquidación quincenal o mensual con deducciones',
+      'Liquidación de retiro: cesantías + prima + indemnización',
+    ],
+  },
+  {
+    icon: '🍔',
+    title: 'POS Restaurante completo',
+    accent: 'amber' as const,
+    items: [
+      'Mapa de mesas con zonas y colores',
+      'Comandas a cocina y barra automáticas',
+      'Modificadores, cursos, división de cuenta',
+      'Domicilios con tracking público al cliente',
+      'Carta digital con código QR',
+    ],
+  },
+  {
+    icon: '🏷️',
+    title: 'Seriales y garantías',
+    accent: 'emerald' as const,
+    items: [
+      'Cada equipo entra con su número de serie',
+      'Pistolea el serial en POS y queda vinculado a la venta',
+      'Tickets de garantía con tracking de estados',
+      'Vencimiento de garantía calculado automáticamente',
+    ],
+  },
+  {
+    icon: '📊',
+    title: 'Reportes que entiendes',
+    accent: 'purple' as const,
+    items: [
+      'Ventas por día, vendedor, categoría, sede',
+      'Cartera vencida y por vencer con avisos',
+      'Cierres de caja con diferencias visibles',
+      'Stock por sede consolidado',
+    ],
+  },
+];
+
+// ============ CASOS DE USO ============
+const useCases = [
+  {
+    emoji: '🏪',
+    title: 'Tienda de barrio',
+    client: 'Minimarket, droguería, abarrotes',
+    description: 'POS rápido con escaneo de barras, cierres diarios, inventario actualizado al instante y reporte semanal automático.',
+    quote: 'Deja Excel atrás. El sistema te dice cuánto vendiste, cuánto debes a proveedores y cuánto stock tienes — sin sumar nada.',
+  },
+  {
+    emoji: '🍕',
+    title: 'Restaurante o pizzería',
+    client: '10-30 mesas, comida casual',
+    description: 'Mesero toma pedido en mesa, comanda sale en cocina al instante, cocinero marca listo en pantalla, mesero cobra y libera mesa.',
+    quote: 'Tus meseros no van más a cocina con papelitos. Todo sale impreso al instante y sabes cuánto vendiste de cada plato.',
+  },
+  {
+    emoji: '💻',
+    title: 'Tienda de tecnología',
+    client: 'Computadores, celulares, impresoras',
+    description: 'Cada equipo entra con su serial, el cajero lo pistolea al vender, queda vinculado a la garantía. Cuando el cliente vuelve por reparación, encuentras todo al instante.',
+    quote: 'Nunca más pierdes un cliente porque no encuentras su factura. Buscas por serial y aparece todo el historial.',
+  },
+  {
+    emoji: '🏬',
+    title: 'Cadena con varias sedes',
+    client: '3-10 tiendas, mismo dueño',
+    description: 'Cada sede vende con su propio cajero y stock. Bodega central despacha con transferencias. Reportes consolidados o por sede.',
+    quote: 'Manejas todas tus tiendas desde un solo lugar. Sabes cuál vende más, qué se agota, y mueves stock con un clic.',
+  },
+  {
+    emoji: '👕',
+    title: 'Ropa y calzado',
+    client: 'Boutique, marca propia',
+    description: 'Productos con tallas y colores como variantes. Promociones y descuentos. Cliente vip con historial de compra.',
+    quote: 'Manejas tallas y colores sin que el inventario se vuelva un caos.',
+  },
+  {
+    emoji: '🚀',
+    title: 'Negocio que arranca',
+    client: 'Emprendedor abriendo su primera tienda',
+    description: 'Plan free-trial 30 días + capacitación inicial. Configuración automática al registrarte: el sistema te deja listo en minutos.',
+    quote: 'No necesitas saber de contabilidad. El sistema lleva los libros y cuando vayas con tu contador, todo está cuadrado.',
+  },
+];
+
+// ============ DIFERENCIADORES ============
+const diffs = [
+  { icon: '🎯', title: 'Todo en uno', text: 'Otros sistemas hacen una parte. Emprenddi cubre todo y los módulos hablan entre sí — sin doble digitación.' },
+  { icon: '📱', title: 'Desde cualquier dispositivo', text: 'Computador, tablet o celular con navegador. Sin instalar nada. Cambia de sede sin reinstalar.' },
+  { icon: '⚡', title: 'Configuración automática', text: 'Te registras y queda con todo listo: PUC, impuestos, métodos de pago, sede. No esperas al asesor.' },
+  { icon: '🇨🇴', title: 'Pensado para Colombia', text: 'PUC, IVA, INC, retenciones, factura electrónica, nómina con prestaciones legales colombianas.' },
+  { icon: '🖨️', title: 'Imprime en cualquier térmica', text: 'Una sola configuración y sale el ticket sin drivers ni complicaciones.' },
+  { icon: '🏢', title: 'Multi-sede de verdad', text: 'Cada sede con su inventario, consecutivos y reportes. Transferencias entre sedes con asiento correcto.' },
+  { icon: '🧮', title: 'Portal del contador', text: 'Tu contador entra a su propio panel sin compartir clave contigo, maneja varias empresas desde un lugar.' },
+  { icon: '🤝', title: 'Soporte cercano', text: 'Equipo en Colombia, respuesta en español, capacitación incluida en cada implementación.' },
+];
+
+// ============ FAQ ============
+const faqs = [
+  { question: '¿Funciona si se cae el internet?', answer: 'El sistema requiere conexión para vender. Recomendamos plan de internet con respaldo (4G del celular). Próximamente lanzaremos un modo sin conexión para zonas con internet inestable.' },
+  { question: '¿Mis datos están seguros?', answer: 'Sí. Servidores en Google Cloud, respaldos diarios automáticos, conexión cifrada. Cada empresa tiene sus datos aislados — nadie ve la información de otra.' },
+  { question: '¿Puedo migrar desde otro sistema?', answer: 'Sí. Cargamos los saldos contables iniciales con un asiento de apertura y el inventario inicial. La capacitación incluye toda la migración.' },
+  { question: '¿Cuánto tarda la implementación?', answer: 'Una sesión de configuración (2 horas) + una sesión de capacitación (2 horas). El cliente empieza a vender el mismo día.' },
+  { question: '¿Puedo facturar a la DIAN desde el día 1?', answer: 'La factura electrónica DIAN requiere que tengas ya tu resolución aprobada y tu certificado digital. Una vez los tengas, lo configuramos en 30 minutos.' },
+  { question: '¿Funciona para mi negocio en particular?', answer: 'Si vendes productos, servicios o ambos, sí. Tenemos clientes en retail, restaurantes, electrónica, ropa, talleres y distribuidores. Si tienes un caso especial, agenda una demo.' },
+  { question: '¿Funciona con mi impresora térmica?', answer: 'Sí. Cualquier impresora térmica que tu computador reconozca (Epson, Star, Citizen, genéricas) funciona con Emprenddi. Se instala un programa pequeño una sola vez.' },
+  { question: '¿Tienen contador incluido?', answer: 'No. Emprenddi es el software contable. El contador es una persona externa. Te ofrecemos un <strong>Portal Contador</strong> para que el tuyo entre sin compartir clave contigo y maneje varias empresas a la vez.' },
+  { question: '¿Qué pasa al terminar la prueba?', answer: 'Eliges un plan pago y sigues operando. Los datos se conservan. Si no contratas, los datos quedan en pausa por 30 días por si decides reactivar.' },
+];
+---
+
+<Base>
+  <!-- HERO -->
+  <Hero />
+
+  <!-- LOGOS DE CONFIANZA / TRUST BAR (placeholder editable) -->
+  <section class="py-10 border-b border-slate-100">
+    <div class="container-narrow">
+      <p class="text-center text-xs font-semibold text-slate-500 uppercase tracking-widest mb-6">
+        Construido para los negocios colombianos
+      </p>
+      <div class="flex flex-wrap justify-center items-center gap-x-12 gap-y-4 text-slate-400">
+        <div class="flex items-center gap-2 text-sm font-semibold">
+          🇨🇴 <span>Hecho en Colombia</span>
+        </div>
+        <div class="flex items-center gap-2 text-sm font-semibold">
+          📑 <span>Autorizado DIAN</span>
+        </div>
+        <div class="flex items-center gap-2 text-sm font-semibold">
+          ☁️ <span>Google Cloud</span>
+        </div>
+        <div class="flex items-center gap-2 text-sm font-semibold">
+          🔒 <span>SSL · datos cifrados</span>
+        </div>
+        <div class="flex items-center gap-2 text-sm font-semibold">
+          🛟 <span>Soporte en español</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features" class="py-20 sm:py-28">
+    <div class="container-narrow">
+      <div class="text-center mb-14">
+        <span class="inline-block px-3 py-1 mb-4 rounded-full bg-brand-100 text-brand-700 text-xs font-bold uppercase tracking-widest">
+          Funcionalidades
+        </span>
+        <h2 class="section-title">
+          Todo lo que tu negocio<br />
+          <span class="bg-gradient-to-r from-brand-600 to-purple-600 bg-clip-text text-transparent">
+            necesita, en un solo lugar
+          </span>
+        </h2>
+        <p class="section-subtitle">
+          Una plataforma que cubre venta, inventario, contabilidad,
+          DIAN, nómina y servicio técnico. Sin instalar nada.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {features.map((f) => <FeatureCard {...f} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- ARRANQUE EN 3 PASOS -->
+  <section class="py-20 sm:py-28 bg-gradient-to-b from-slate-50 to-white">
+    <div class="container-narrow">
+      <div class="text-center mb-14">
+        <span class="inline-block px-3 py-1 mb-4 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold uppercase tracking-widest">
+          Listo en 5 minutos
+        </span>
+        <h2 class="section-title">
+          Te registras y <span class="text-emerald-600">ya estás operando</span>
+        </h2>
+        <p class="section-subtitle">
+          Olvídate de las semanas de configuración. Emprenddi te deja
+          listo automáticamente con todo lo que tu negocio necesita.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Paso 1 -->
+        <div class="relative p-7 rounded-2xl bg-white border border-slate-200 hover:shadow-lg transition">
+          <div class="absolute -top-4 -left-2 w-12 h-12 rounded-full bg-brand-600 text-white text-xl font-extrabold flex items-center justify-center shadow-lg">1</div>
+          <h3 class="text-xl font-bold mt-4 mb-3">Te registras en 60s</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Llenas un formulario corto con los datos de tu empresa y creas tu usuario administrador. Sin tarjeta de crédito.
+          </p>
+        </div>
+
+        <!-- Paso 2 -->
+        <div class="relative p-7 rounded-2xl bg-white border border-slate-200 hover:shadow-lg transition">
+          <div class="absolute -top-4 -left-2 w-12 h-12 rounded-full bg-brand-600 text-white text-xl font-extrabold flex items-center justify-center shadow-lg">2</div>
+          <h3 class="text-xl font-bold mt-4 mb-3">Configuración automática</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            En segundos quedan listos: Plan de Cuentas colombiano, IVA, retenciones, monedas, métodos de pago, tu sede principal y plantillas de impresión.
+          </p>
+        </div>
+
+        <!-- Paso 3 -->
+        <div class="relative p-7 rounded-2xl bg-white border border-slate-200 hover:shadow-lg transition">
+          <div class="absolute -top-4 -left-2 w-12 h-12 rounded-full bg-emerald-600 text-white text-xl font-extrabold flex items-center justify-center shadow-lg">3</div>
+          <h3 class="text-xl font-bold mt-4 mb-3">A vender</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Entras al POS, agregas tus productos y empiezas a facturar. Mientras vendes, el sistema lleva tu contabilidad solo.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASOS DE USO -->
+  <section id="casos" class="py-20 sm:py-28">
+    <div class="container-narrow">
+      <div class="text-center mb-14">
+        <span class="inline-block px-3 py-1 mb-4 rounded-full bg-purple-100 text-purple-700 text-xs font-bold uppercase tracking-widest">
+          Casos de uso
+        </span>
+        <h2 class="section-title">
+          Para todo tipo de negocio
+        </h2>
+        <p class="section-subtitle">
+          Tiendas, restaurantes, talleres, distribuidores. Si vendes
+          productos o servicios, Emprenddi es para ti.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {useCases.map((u) => <UseCaseCard {...u} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- DIFERENCIADORES -->
+  <section class="py-20 sm:py-28 bg-slate-50">
+    <div class="container-narrow">
+      <div class="text-center mb-14">
+        <span class="inline-block px-3 py-1 mb-4 rounded-full bg-amber-100 text-amber-700 text-xs font-bold uppercase tracking-widest">
+          Por qué Emprenddi
+        </span>
+        <h2 class="section-title">
+          Lo que nos hace diferentes
+        </h2>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {diffs.map((d) => (
+          <div class="p-5 rounded-xl bg-white border border-slate-200 hover:border-brand-300 hover:shadow-md transition">
+            <div class="text-3xl mb-3">{d.icon}</div>
+            <h3 class="font-bold text-slate-900 mb-2">{d.title}</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">{d.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-20 sm:py-28">
+    <div class="container-narrow max-w-3xl">
+      <div class="text-center mb-12">
+        <span class="inline-block px-3 py-1 mb-4 rounded-full bg-rose-100 text-rose-700 text-xs font-bold uppercase tracking-widest">
+          Preguntas frecuentes
+        </span>
+        <h2 class="section-title">
+          ¿Te queda alguna duda?
+        </h2>
+        <p class="section-subtitle">
+          Aquí están las preguntas que más nos hacen.
+          ¿No encuentras la tuya? <a href="mailto:comercial@emprenddi.com" class="text-brand-600 font-semibold hover:underline">Escríbenos</a>.
+        </p>
+      </div>
+
+      <div>
+        {faqs.map((f) => <FAQItem question={f.question} answer={f.answer} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <CTASection />
+</Base>
