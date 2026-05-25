@@ -1,5 +1,7 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
+import { docsLoader } from '@astrojs/starlight/loaders';
+import { docsSchema } from '@astrojs/starlight/schema';
 
 // Blog SEO. Cada post es un .md en src/content/blog/.
 // Frontmatter validado con Zod — si falta algo el build avisa claro.
@@ -22,10 +24,17 @@ const blog = defineCollection({
     ]),
     tags: z.array(z.string()).default([]),
     readingMinutes: z.number().int().positive().default(5),
-    /** Hero image opcional. Por ahora usamos un placeholder de Unsplash o nada. */
     cover: z.string().optional(),
     draft: z.boolean().default(false),
   }),
 });
 
-export const collections = { blog };
+// Starlight: documentación del producto en /docs/*.
+// Los archivos viven en src/content/docs/* y se generan automáticamente
+// como rutas. El schema valida frontmatter estándar de Starlight.
+const docs = defineCollection({
+  loader: docsLoader(),
+  schema: docsSchema(),
+});
+
+export const collections = { blog, docs };

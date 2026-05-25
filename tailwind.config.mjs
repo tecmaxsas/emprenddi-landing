@@ -1,6 +1,12 @@
+import starlightPlugin from '@astrojs/starlight-tailwind';
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+  // El preset de Starlight provee dark mode + clases compatibles con sus
+  // componentes. No afecta a las páginas no-docs (landing, blog).
+  plugins: [starlightPlugin()],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -20,6 +26,10 @@ export default {
         accent: {
           500: '#a855f7',
           600: '#9333ea',
+        },
+        // Starlight: que su accent use la marca
+        'sl-accent': {
+          DEFAULT: '#4f46e5',
         },
       },
       fontFamily: {
@@ -46,5 +56,4 @@ export default {
       },
     },
   },
-  plugins: [],
 };

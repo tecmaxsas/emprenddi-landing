@@ -1,0 +1,47 @@
+---
+// Sobrescribe el slot SocialIcons de Starlight para mostrar un link
+// "Volver a la web" — así el usuario del centro de ayuda puede regresar
+// a la landing y a Solicitar demo sin perderse.
+---
+
+<div class="header-extra">
+  <a href="/" class="header-extra__link" title="Ir a la web principal">
+    ← Volver a la web
+  </a>
+  <a href="/contacto" class="header-extra__cta">
+    Solicitar demo
+  </a>
+</div>
+
+<style>
+  .header-extra {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .header-extra__link {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--sl-color-gray-3);
+    text-decoration: none;
+    transition: color 150ms;
+  }
+  .header-extra__link:hover { color: var(--sl-color-accent); }
+  .header-extra__cta {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: #4f46e5;
+    color: #ffffff !important;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 150ms;
+  }
+  .header-extra__cta:hover { background: #4338ca; }
+  /* En móvil escondemos el link "Volver" para no saturar la barra */
+  @media (max-width: 50rem) {
+    .header-extra__link { display: none; }
+  }
+</style>
