@@ -1,0 +1,136 @@
+---
+import Base from '../layouts/Base.astro';
+import CTASection from '../components/CTASection.astro';
+
+const valores = [
+  {
+    icon: '🎯',
+    title: 'Simplicidad real',
+    text: 'Creemos que un dueño de tienda no debería pelear con software ni descifrar manuales. Por eso Emprenddi está pensado para que vendas en minutos, no en semanas.',
+  },
+  {
+    icon: '🤝',
+    title: 'Acompañamiento honesto',
+    text: 'No te vendemos lo que no necesitas. Si tu negocio es pequeño y arrancando, te decimos lo mínimo necesario. Si creces, escalamos contigo.',
+  },
+  {
+    icon: '🇨🇴',
+    title: 'Hecho para Colombia',
+    text: 'El PUC, los impuestos, las retenciones, la nómina, la información exógena — todo pensado desde el inicio para la normativa colombiana. No es un sistema adaptado: es un sistema nacido aquí.',
+  },
+  {
+    icon: '🔒',
+    title: 'Tus datos son tuyos',
+    text: 'Aislamos cada empresa por seguridad. Hacemos respaldos diarios. Nunca vendemos información ni la usamos para nada distinto a operar tu cuenta.',
+  },
+];
+---
+
+<Base
+  title="Sobre nosotros · Emprenddi"
+  description="Conoce al equipo detrás de Emprenddi. Construimos software contable y POS para negocios colombianos que están creciendo."
+>
+  <!-- Header -->
+  <section class="bg-hero-gradient text-white py-16 sm:py-20">
+    <div class="container-narrow text-center">
+      <span class="inline-block px-3 py-1 mb-5 rounded-full bg-white/15 backdrop-blur text-xs font-bold uppercase tracking-widest border border-white/20">
+        Sobre nosotros
+      </span>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
+        Software hecho<br />
+        <span class="bg-gradient-to-r from-amber-300 to-pink-300 bg-clip-text text-transparent">
+          para los que crean
+        </span>
+      </h1>
+      <p class="mt-5 text-lg text-white/90 max-w-2xl mx-auto">
+        Creamos Emprenddi para que las PyMEs colombianas tengan
+        un sistema serio sin pagar precios de empresa multinacional.
+      </p>
+    </div>
+  </section>
+
+  <!-- Misión / historia -->
+  <section class="py-20 sm:py-24">
+    <div class="container-narrow max-w-3xl">
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-6">
+        ¿Por qué Emprenddi?
+      </h2>
+      <div class="prose prose-slate max-w-none text-slate-700 leading-relaxed space-y-5 text-lg">
+        <p>
+          Pasamos años viendo a dueños de tiendas, restaurantes y talleres
+          en Colombia perder horas peleando con Excel, cuadernos, software
+          obsoleto, o sistemas tan complicados que necesitaban capacitación
+          de semanas.
+        </p>
+        <p>
+          La mayoría de soluciones eran <em>o muy caras</em> (pensadas para
+          empresas grandes con plata para consultoría), <em>o muy básicas</em>
+          (un POS que no llevaba contabilidad real, o una contabilidad sin
+          inventario). Y casi ninguna estaba pensada de raíz para el
+          régimen colombiano: PUC, IVA, retenciones, DIAN, nómina con
+          prestaciones legales.
+        </p>
+        <p>
+          <strong class="text-slate-900">Emprenddi nació para eso:</strong>
+          un solo lugar donde el dueño vende, el cajero opera, el contador
+          ve los libros, y la DIAN recibe lo que tiene que recibir — sin
+          tener que pegar tres sistemas con cinta.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Valores -->
+  <section class="py-20 bg-slate-50">
+    <div class="container-narrow">
+      <div class="text-center mb-12">
+        <h2 class="section-title">Nuestros valores</h2>
+        <p class="section-subtitle">
+          Lo que nos guía cuando decidimos qué construir y cómo atender a un cliente.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        {valores.map((v) => (
+          <div class="p-7 rounded-2xl bg-white border border-slate-200 hover:shadow-lg transition">
+            <div class="text-4xl mb-3">{v.icon}</div>
+            <h3 class="text-xl font-bold text-slate-900 mb-3">{v.title}</h3>
+            <p class="text-slate-600 leading-relaxed">{v.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Lo que hacemos -->
+  <section class="py-20">
+    <div class="container-narrow max-w-3xl">
+      <h2 class="text-3xl font-extrabold text-slate-900 mb-6">
+        ¿Qué hacemos exactamente?
+      </h2>
+      <div class="text-slate-700 leading-relaxed space-y-4 text-lg">
+        <p>
+          Emprenddi es una <strong>plataforma SaaS</strong> que un negocio
+          contrata para operar todo su día a día: venta, inventario,
+          contabilidad, nómina, facturación a la DIAN y servicio técnico
+          de garantías.
+        </p>
+        <p>
+          No somos consultora contable ni intermediario tributario. Somos
+          el <strong>software propio</strong> sobre el que tu equipo y tu
+          contador trabajan. Si tu contador es interno, le damos un panel;
+          si es externo, le damos un Portal del Contador donde maneja
+          varias empresas a la vez sin compartir tus claves.
+        </p>
+        <p>
+          La factura electrónica se emite a través de proveedores
+          tecnológicos autorizados por la DIAN con los que nos integramos.
+          Tú no tienes que hacer nada extra: configuramos la conexión y
+          listo.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</Base>

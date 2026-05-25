@@ -1,191 +1,213 @@
 ---
 import Base from '../layouts/Base.astro';
-import PricingCard from '../components/PricingCard.astro';
 import CTASection from '../components/CTASection.astro';
 import FAQItem from '../components/FAQItem.astro';
 
-const APP_URL = 'https://pos.emprenddi.com/app';
-
-// Reemplazar precios reales cuando comercial los confirme.
-const plans = [
+// Plan único anual — todo incluido.
+const features = [
   {
-    name: 'Prueba',
-    tagline: 'Para probar la plataforma 30 días',
-    price: 'Gratis',
-    period: '30 días',
-    badge: undefined,
-    highlighted: false,
-    ctaLabel: 'Empezar ahora',
-    ctaUrl: APP_URL + '/register',
-    features: [
-      '1 sede · 1 usuario',
-      'POS completo + inventario',
-      'Contabilidad automática (PUC colombiano)',
-      'Facturación POS local (sin DIAN electrónica)',
-      'Reportes básicos',
-      'Sin tarjeta de crédito',
+    group: 'Operación diaria',
+    items: [
+      'POS retail con pantalla táctil y lector de barras',
+      'POS Restaurante con mesas, cocina (KDS) y modificadores',
+      'Cotizaciones, remisiones y pedidos',
+      'Caja con apertura y cierre por turno',
     ],
   },
   {
-    name: 'Pro',
-    tagline: 'Para PyMEs en crecimiento',
-    price: '$149.000',
-    period: '/mes',
-    badge: 'Más popular',
-    highlighted: true,
-    ctaLabel: 'Empezar prueba gratis',
-    ctaUrl: APP_URL + '/register',
-    features: [
-      '<strong>Hasta 3 sedes · 5 usuarios</strong>',
-      'Todo de Starter +',
-      '<strong>Facturación electrónica DIAN</strong>',
-      'Nómina completa (liquidación + retiros)',
-      'Garantías y servicio técnico',
-      'Gestión de seriales',
-      'POS Restaurante con KDS',
-      'Reportes avanzados + exportar',
+    group: 'Inventario',
+    items: [
+      'Stock en tiempo real por sede o bodega',
+      'Promedio ponderado automático',
+      'Ajustes, transferencias y aperturas',
+      'Alertas de stock bajo',
+      'Gestión por número de serie (electrónica)',
+    ],
+  },
+  {
+    group: 'Contabilidad',
+    items: [
+      'Plan de Cuentas colombiano (PUC) preconfigurado',
+      'Asientos automáticos en cada venta, compra y pago',
+      'Libros oficiales: Diario, Mayor, Auxiliar, Balance',
+      'Cierre de mes con bloqueo de ediciones',
+      'Conciliación bancaria',
+      'Centros de costo',
+    ],
+  },
+  {
+    group: 'DIAN',
+    items: [
+      'Factura electrónica DIAN',
+      'Notas crédito y débito electrónicas',
+      'Documento equivalente POS (talonarios)',
+      'Documento soporte (compras a no responsables IVA)',
+      'Información exógena anual',
+      'Retenciones (fuente, IVA, ICA)',
+    ],
+  },
+  {
+    group: 'Compras y proveedores',
+    items: [
+      'Factura de compra + asiento automático',
+      'Pagos parciales o totales',
+      'Cuentas por pagar con alertas',
+      'Devoluciones a proveedor',
+    ],
+  },
+  {
+    group: 'Nómina y empleados',
+    items: [
+      'Contratos: indefinido, fijo, obra labor, aprendizaje',
+      'Parámetros legales vigentes (SMLMV, UVT)',
+      'Liquidación quincenal o mensual',
+      'Liquidación de retiro con cesantías y prima',
+    ],
+  },
+  {
+    group: 'Servicio técnico (garantías)',
+    items: [
+      'Tickets RMA con tracking de estados',
+      'Asignación de técnico interno',
+      'Comprobante imprimible de recepción',
+      'Vencimiento de garantía calculado automáticamente',
+    ],
+  },
+  {
+    group: 'Multi-sede y usuarios',
+    items: [
+      '<strong>Sedes ilimitadas</strong>',
+      '<strong>Usuarios ilimitados</strong>',
+      'Roles predefinidos: admin, gerente, contador, cajero, vendedor',
       'Portal del Contador externo',
-      'Soporte prioritario por chat',
     ],
   },
   {
-    name: 'Enterprise',
-    tagline: 'Empresas medianas, multi-sede',
-    price: 'Personalizado',
-    period: '',
-    badge: undefined,
-    highlighted: false,
-    ctaLabel: 'Agendar demo',
-    ctaUrl: 'mailto:comercial@emprenddi.com',
-    features: [
-      '<strong>Sedes y usuarios ilimitados</strong>',
-      'Todo de Pro +',
-      'Migración asistida desde otro sistema',
-      'Capacitación on-site',
-      'Soporte dedicado · SLA garantizado',
-      'Personalización de plantillas',
-      'Integraciones a medida (Excel, ERP)',
-      'Account manager asignado',
+    group: 'Implementación y soporte',
+    items: [
+      'Sesión de configuración inicial (2 horas)',
+      'Sesión de capacitación al equipo (2 horas)',
+      'Migración de saldos contables iniciales',
+      'Soporte por chat y correo',
+      'Actualizaciones continuas sin costo extra',
     ],
   },
 ];
 
-const starter = {
-  name: 'Starter',
-  tagline: 'Para microempresas que empiezan',
-  price: '$49.000',
-  period: '/mes',
-  badge: undefined,
-  highlighted: false,
-  ctaLabel: 'Empezar prueba gratis',
-  ctaUrl: APP_URL + '/register',
-  features: [
-    '1 sede · 1 usuario',
-    'POS + inventario + contabilidad',
-    'Facturación POS local',
-    'Reportes esenciales',
-    'Soporte por correo',
-  ],
-};
-
-// Showing 4 plans: prueba (free trial) + 3 paid (starter, pro, enterprise)
-const allPlans = [plans[0], starter, plans[1], plans[2]];
-
 const faqs = [
-  { question: '¿Hay costos ocultos?', answer: 'No. El precio publicado es lo que pagas. Sin comisión por transacción, sin cobros por factura emitida, sin sorpresas.' },
-  { question: '¿Puedo cambiar de plan?', answer: 'Sí, en cualquier momento. Si subes de plan se prorratea el cobro. Si bajas, aplica al siguiente periodo.' },
-  { question: '¿Cómo se factura?', answer: 'Mensual o anual (con descuento del 15% en anual). Aceptamos transferencia, tarjeta de crédito y PSE.' },
-  { question: '¿La DIAN está incluida en todos los planes?', answer: 'La <strong>facturación POS local</strong> (talonarios) está en todos los planes. La <strong>facturación electrónica DIAN</strong> (con CUFE) viene desde el plan Pro.' },
-  { question: '¿Qué pasa si dejo de pagar?', answer: 'Tu cuenta se suspende pero los datos se conservan 30 días. Si vuelves a contratar, todo sigue intacto. Después de 30 días los datos se eliminan.' },
-  { question: '¿Tienen descuento para varias empresas?', answer: 'Sí. Si manejas varias empresas (eres holding o contador externo), agenda una demo y armamos un paquete a medida.' },
-  { question: '¿Necesito otro software además de Emprenddi?', answer: 'No. Emprenddi cubre POS, contabilidad, inventario, DIAN, nómina, compras y reportes. Es todo en uno.' },
+  { question: '¿Por qué un solo plan?', answer: 'Porque tu negocio necesita todas las funcionalidades para operar correctamente: contabilidad, facturación, inventario, nómina y POS no se pueden separar sin romper la lógica integrada. Un plan único con todo incluido evita confusiones, sobrecostos y limitaciones artificiales.' },
+  { question: '¿Hay costos ocultos?', answer: 'No. El precio publicado es lo que pagas. Sin comisión por factura emitida, sin cobros por transacción, sin sorpresas. La implementación y capacitación inicial están incluidas en el plan. Lo único que se cotiza aparte es la migración asistida desde otro sistema contable, si aplica.' },
+  { question: '¿Por qué pago anual?', answer: 'El modelo anual nos permite acompañarte a profundidad: configuración, capacitación y soporte a lo largo del año. Además te aseguramos el precio durante 12 meses sin variaciones.' },
+  { question: '¿Cómo se paga?', answer: 'Transferencia bancaria, PSE o tarjeta de crédito. Emitimos factura electrónica DIAN. Si necesitas crédito o pago en cuotas, conversémoslo en la demo.' },
+  { question: '¿Qué pasa al final del año?', answer: 'Renuevas la suscripción y sigues operando sin interrupción. Si no renuevas, tus datos quedan en pausa 30 días por si decides reactivar; después se eliminan permanentemente.' },
+  { question: '¿Puedo migrar desde otro sistema?', answer: 'Sí. Cargamos los saldos contables iniciales y el inventario inicial sin que pierdas la continuidad de tu información. La capacitación incluye el proceso completo de migración.' },
+  { question: '¿Necesito otro software además de Emprenddi?', answer: 'No. Emprenddi cubre POS, contabilidad, inventario, DIAN, nómina, compras, garantías y reportes. Es todo en uno.' },
+  { question: '¿Hay descuento para varias empresas?', answer: 'Sí. Si manejas varias empresas (holding, grupo de tiendas o eres contador externo), agenda una demo y armamos un paquete a medida.' },
 ];
 ---
 
 <Base
   title="Precios · Emprenddi"
-  description="Planes desde $49.000/mes. Prueba 30 días gratis sin tarjeta. Facturación DIAN incluida desde el plan Pro."
+  description="Un solo plan anual con todo incluido. Sin sorpresas. Implementación, capacitación y soporte sin costo extra."
 >
   <!-- Header -->
   <section class="bg-hero-gradient text-white py-16 sm:py-20">
     <div class="container-narrow text-center">
       <span class="inline-block px-3 py-1 mb-5 rounded-full bg-white/15 backdrop-blur text-xs font-bold uppercase tracking-widest border border-white/20">
-        Precios transparentes
+        Precio transparente
       </span>
       <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
-        Elige el plan<br />
+        Un solo plan,<br />
         <span class="bg-gradient-to-r from-amber-300 to-pink-300 bg-clip-text text-transparent">
-          que necesitas hoy
+          todo lo que necesitas
         </span>
       </h1>
       <p class="mt-5 text-lg text-white/90 max-w-2xl mx-auto">
-        Empieza gratis 30 días. Sin tarjeta de crédito.
-        Cambias o cancelas en cualquier momento.
+        Sin escalones, sin límites artificiales. Todas las funcionalidades
+        para que tu negocio opere completo desde el día uno.
       </p>
     </div>
   </section>
 
-  <!-- Plans grid -->
-  <section class="py-20">
-    <div class="container-narrow">
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-5 items-start">
-        {allPlans.map((p) => <PricingCard {...p} />)}
+  <!-- Single plan card -->
+  <section class="py-16 sm:py-20 -mt-12">
+    <div class="container-narrow max-w-3xl">
+      <div class="relative rounded-3xl bg-white shadow-2xl border-2 border-brand-100 overflow-hidden">
+        <!-- Top stripe -->
+        <div class="absolute top-0 inset-x-0 h-2 bg-gradient-to-r from-brand-600 via-purple-600 to-brand-600"></div>
+
+        <div class="p-8 sm:p-12">
+          <!-- Plan header -->
+          <div class="text-center">
+            <span class="inline-block px-4 py-1.5 mb-4 rounded-full bg-gradient-to-r from-brand-600 to-purple-600 text-white text-xs font-bold uppercase tracking-widest">
+              Plan Anual · Todo incluido
+            </span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-2">Emprenddi</h2>
+            <p class="text-slate-600">La plataforma completa para tu negocio en Colombia</p>
+          </div>
+
+          <!-- Price -->
+          <div class="text-center my-8 py-6 border-y border-slate-100">
+            <div class="flex items-baseline justify-center gap-2">
+              <span class="text-5xl sm:text-6xl font-extrabold bg-gradient-to-r from-brand-600 to-purple-600 bg-clip-text text-transparent">
+                $1.600.000
+              </span>
+              <span class="text-lg text-slate-500 font-medium">COP / año</span>
+            </div>
+            <p class="text-sm text-slate-500 mt-2">
+              Equivale a <strong class="text-slate-700">$133.333 / mes</strong> · IVA no incluido
+            </p>
+          </div>
+
+          <!-- CTA -->
+          <div class="flex flex-col sm:flex-row gap-3 justify-center mb-8">
+            <a href="/contacto" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-brand-600 hover:bg-brand-700 text-white font-bold shadow-lg shadow-brand-600/30 transition">
+              Solicitar demo
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+              </svg>
+            </a>
+            <a href="mailto:comercial@emprenddi.com" class="btn-ghost justify-center">
+              Escríbenos
+            </a>
+          </div>
+
+          <p class="text-center text-xs text-slate-500">
+            Después de la demo coordinamos contratación, configuración y capacitación.
+          </p>
+        </div>
       </div>
-
-      <p class="mt-10 text-center text-sm text-slate-500">
-        Precios en pesos colombianos (COP), IVA no incluido.
-        Pago mensual o anual con 15% de descuento.
-      </p>
     </div>
   </section>
 
-  <!-- Comparativa de features (tabla) -->
+  <!-- Lo que incluye - grouped checklist -->
   <section class="py-16 bg-slate-50">
     <div class="container-narrow">
-      <h2 class="section-title text-center mb-2">¿Qué incluye cada plan?</h2>
-      <p class="section-subtitle text-center mb-10">Compáralos en detalle</p>
+      <div class="text-center mb-12">
+        <h2 class="section-title">Todo lo que incluye</h2>
+        <p class="section-subtitle">
+          Sin diferenciar planes. Tu equipo accede a la plataforma completa.
+        </p>
+      </div>
 
-      <div class="overflow-x-auto rounded-2xl bg-white border border-slate-200 shadow-sm">
-        <table class="w-full text-sm">
-          <thead>
-            <tr class="bg-slate-100">
-              <th class="text-left p-4 font-bold text-slate-900">Característica</th>
-              <th class="p-4 font-bold text-slate-700 text-center">Prueba</th>
-              <th class="p-4 font-bold text-slate-700 text-center">Starter</th>
-              <th class="p-4 font-bold text-brand-700 text-center">Pro</th>
-              <th class="p-4 font-bold text-slate-700 text-center">Enterprise</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-100">
-            {[
-              ['Sedes', '1', '1', '3', 'Ilimitadas'],
-              ['Usuarios', '1', '1', '5', 'Ilimitados'],
-              ['POS retail', '✓', '✓', '✓', '✓'],
-              ['POS Restaurante (mesas, KDS)', '—', '—', '✓', '✓'],
-              ['Inventario y kardex', '✓', '✓', '✓', '✓'],
-              ['Contabilidad automática', '✓', '✓', '✓', '✓'],
-              ['Plan de Cuentas DIAN', '✓', '✓', '✓', '✓'],
-              ['Facturación POS local', '✓', '✓', '✓', '✓'],
-              ['Facturación electrónica DIAN', '—', '—', '✓', '✓'],
-              ['Nómina y empleados', '—', '—', '✓', '✓'],
-              ['Garantías y servicio técnico', '—', '—', '✓', '✓'],
-              ['Gestión de seriales', '—', '—', '✓', '✓'],
-              ['Reportes avanzados', '—', '—', '✓', '✓'],
-              ['Portal del Contador externo', '—', '—', '✓', '✓'],
-              ['Soporte', 'Email', 'Email', 'Chat prioritario', 'Dedicado + SLA'],
-              ['Migración desde otro sistema', '—', '—', '—', '✓'],
-              ['Capacitación on-site', '—', '—', '—', '✓'],
-            ].map(([feat, p, s, pr, e]) => (
-              <tr class="hover:bg-slate-50">
-                <td class="p-4 font-medium text-slate-900">{feat}</td>
-                <td class="p-4 text-center text-slate-600">{p}</td>
-                <td class="p-4 text-center text-slate-600">{s}</td>
-                <td class="p-4 text-center text-brand-700 font-semibold bg-brand-50/50">{pr}</td>
-                <td class="p-4 text-center text-slate-600">{e}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {features.map((group) => (
+          <div class="p-6 rounded-2xl bg-white border border-slate-200 hover:shadow-md transition">
+            <h3 class="text-base font-bold text-brand-700 mb-4 pb-3 border-b border-slate-100">
+              {group.group}
+            </h3>
+            <ul class="space-y-2.5">
+              {group.items.map((item) => (
+                <li class="flex items-start gap-2 text-sm text-slate-700">
+                  <svg class="w-4 h-4 mt-0.5 text-emerald-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                  </svg>
+                  <span set:html={item}></span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -193,7 +215,7 @@ const faqs = [
   <!-- FAQ -->
   <section class="py-20">
     <div class="container-narrow max-w-3xl">
-      <h2 class="section-title text-center mb-10">Preguntas sobre precios</h2>
+      <h2 class="section-title text-center mb-10">Preguntas sobre el plan</h2>
       <div>
         {faqs.map((f) => <FAQItem question={f.question} answer={f.answer} />)}
       </div>

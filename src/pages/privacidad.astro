@@ -1,0 +1,80 @@
+---
+import Base from '../layouts/Base.astro';
+
+// IMPORTANTE: texto base. Debe revisarse con un asesor jurídico antes
+// de publicación definitiva. Edita los datos de la empresa según los reales.
+const COMPANY = {
+  name: 'Emprenddi',
+  legal: 'Tecmax SAS',
+  nit: '900.000.000-0',
+  city: 'Bogotá D.C., Colombia',
+  address: '(definir dirección)',
+  email: 'comercial@emprenddi.com',
+  updated: '23 de mayo de 2026',
+};
+
+const secciones = [
+  ['Responsable del tratamiento', `${COMPANY.legal} (NIT ${COMPANY.nit}), con domicilio en ${COMPANY.address}, ${COMPANY.city}, actúa como responsable del tratamiento de los datos personales recolectados a través de la plataforma.`],
+  ['Marco legal', 'El tratamiento de datos se realiza en cumplimiento de la Ley 1581 de 2012, el Decreto 1377 de 2013 y demás normas concordantes sobre protección de datos personales en Colombia.'],
+  ['Autorización del titular', 'Al registrarte y usar la plataforma autorizas de manera previa, expresa e informada el tratamiento de tus datos personales para las finalidades descritas en esta política.'],
+  ['Datos que recolectamos', 'Recolectamos datos de identificación y contacto (nombre, documento, correo, teléfono), información de la empresa (razón social, NIT, dirección), datos de facturación y la información operativa y contable que cargas voluntariamente para usar el servicio.'],
+  ['Finalidades del tratamiento', 'Usamos los datos para prestar y mejorar el servicio, gestionar la facturación y la suscripción, brindar soporte, enviar comunicaciones del servicio y cumplir obligaciones legales y tributarias.'],
+  ['Derechos del titular', 'Como titular puedes conocer, actualizar, rectificar y suprimir tus datos, solicitar prueba de la autorización, ser informado del uso dado a tus datos, presentar quejas y revocar la autorización cuando proceda.'],
+  ['Cómo ejercer tus derechos', `Puedes ejercer tus derechos enviando una solicitud a <a href="mailto:${COMPANY.email}" class="text-brand-600 hover:underline">${COMPANY.email}</a>. La atenderemos en los plazos previstos por la ley.`],
+  ['Encargados y transmisión de datos', 'Podemos apoyarnos en proveedores tecnológicos (alojamiento de servidores, transmisión electrónica a la DIAN, pasarelas de pago, correo) que actúan como encargados del tratamiento bajo acuerdos de confidencialidad y seguridad.'],
+  ['Seguridad de la información', 'Aplicamos medidas técnicas, humanas y administrativas razonables para proteger los datos contra acceso no autorizado, pérdida, alteración o divulgación. Esto incluye conexión cifrada SSL, aislamiento por empresa y respaldos diarios.'],
+  ['Conservación de los datos', 'Conservamos los datos durante la vigencia de la relación contractual y los plazos exigidos por la normativa contable, tributaria y de protección de datos aplicable.'],
+  ['Datos de menores de edad', 'La plataforma está dirigida a empresas y personas mayores de edad. No recolectamos de forma consciente datos de menores sin la autorización de sus representantes legales.'],
+  ['Cookies', 'Utilizamos cookies necesarias para el funcionamiento, la sesión y la seguridad de la plataforma. Puedes gestionarlas desde la configuración de tu navegador.'],
+  ['Autoridad de control', 'La Superintendencia de Industria y Comercio (SIC) es la autoridad de control en materia de protección de datos personales en Colombia. Si consideras vulnerados tus derechos, puedes presentar queja ante esta entidad.'],
+  ['Vigencia y cambios', 'Esta política rige desde su publicación. Podemos actualizarla; las modificaciones se publicarán en esta misma página y, cuando sean relevantes, serán notificadas por correo electrónico.'],
+  ['Contacto', `Para solicitudes relacionadas con tus datos personales, escríbenos a <a href="mailto:${COMPANY.email}" class="text-brand-600 hover:underline">${COMPANY.email}</a>.`],
+];
+---
+
+<Base
+  title="Política de Privacidad · Emprenddi"
+  description="Cómo tratamos los datos personales en Emprenddi conforme a la Ley 1581 de 2012."
+>
+  <!-- Header -->
+  <section class="bg-hero-gradient text-white py-14">
+    <div class="container-narrow text-center">
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">
+        Política de Tratamiento<br />de Datos Personales
+      </h1>
+      <p class="mt-3 text-sm text-white/80">
+        Última actualización: {COMPANY.updated}
+      </p>
+    </div>
+  </section>
+
+  <!-- Contenido -->
+  <section class="py-16">
+    <div class="container-narrow max-w-3xl">
+      <p class="text-lg text-slate-700 mb-10 leading-relaxed">
+        En <strong>{COMPANY.name}</strong> protegemos los datos personales
+        conforme a la normativa colombiana de habeas data. Esta política
+        describe cómo se recolectan, usan, almacenan y protegen.
+      </p>
+
+      <div class="space-y-7">
+        {secciones.map(([titulo, contenido], i) => (
+          <div>
+            <h2 class="text-base font-bold text-slate-900 mb-2 flex gap-3 items-baseline">
+              <span class="text-brand-600 font-extrabold text-sm">{i + 1}.</span>
+              <span>{titulo}</span>
+            </h2>
+            <p class="text-slate-700 leading-relaxed pl-7" set:html={contenido}></p>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-14 pt-8 border-t border-slate-200 text-sm text-slate-500">
+        <p>¿Tienes preguntas? Escríbenos a <a href={`mailto:${COMPANY.email}`} class="text-brand-600 font-semibold hover:underline">{COMPANY.email}</a>.</p>
+        <p class="mt-2">
+          Ver también: <a href="/terminos" class="text-brand-600 hover:underline">Términos y Condiciones</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,32 +1,30 @@
 ---
 const year = new Date().getFullYear();
-const APP_URL = 'https://pos.emprenddi.com/app';
 
 const cols = [
   {
     title: 'Producto',
     links: [
-      { href: '#features', label: 'Funcionalidades' },
-      { href: '#casos', label: 'Casos de uso' },
+      { href: '/#features', label: 'Funcionalidades' },
+      { href: '/#casos', label: 'Casos de uso' },
       { href: '/precios', label: 'Precios' },
-      { href: '#faq', label: 'Preguntas frecuentes' },
+      { href: '/#faq', label: 'Preguntas frecuentes' },
     ],
   },
   {
     title: 'Empresa',
     links: [
-      { href: '#about', label: 'Sobre nosotros' },
-      { href: 'mailto:comercial@emprenddi.com', label: 'Contacto' },
-      { href: '/legal/terminos', label: 'Términos y condiciones' },
-      { href: '/legal/privacidad', label: 'Política de privacidad' },
+      { href: '/sobre-nosotros', label: 'Sobre nosotros' },
+      { href: '/contacto', label: 'Contacto' },
+      { href: '/terminos', label: 'Términos y condiciones' },
+      { href: '/privacidad', label: 'Política de privacidad' },
     ],
   },
   {
-    title: 'Cuenta',
+    title: 'Contacto',
     links: [
-      { href: APP_URL + '/register', label: 'Empezar gratis' },
-      { href: APP_URL + '/login', label: 'Iniciar sesión' },
-      { href: APP_URL + '/password-reset/request', label: 'Olvidé mi contraseña' },
+      { href: 'mailto:comercial@emprenddi.com', label: 'comercial@emprenddi.com' },
+      { href: '/contacto', label: 'Solicitar demo' },
     ],
   },
 ];
@@ -61,12 +59,14 @@ const cols = [
     </div>
 
     <!-- Bottom -->
-    <div class="mt-12 pt-8 border-t border-slate-800 flex flex-col sm:flex-row gap-4 justify-between items-center text-sm text-slate-500">
+    <div class="mt-12 pt-8 border-t border-slate-800 text-center sm:text-left flex flex-col sm:flex-row gap-4 justify-between items-center text-sm text-slate-500">
       <div>
         © {year} Emprenddi · Hecho en Colombia 🇨🇴
       </div>
       <div class="flex items-center gap-4">
-        <span>Facturación electrónica autorizada DIAN</span>
+        <a href="/terminos" class="hover:text-slate-300 transition">Términos</a>
+        <span class="text-slate-700">·</span>
+        <a href="/privacidad" class="hover:text-slate-300 transition">Privacidad</a>
       </div>
     </div>
   </div>

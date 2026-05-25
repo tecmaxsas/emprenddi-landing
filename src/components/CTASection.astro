@@ -1,5 +1,7 @@
 ---
-const APP_URL = 'https://pos.emprenddi.com/app';
+// CTA final compartido por landing y precios. Los dos botones llevan
+// a /contacto: solicitar demo (más informativo) o agendar/escribir
+// directo. No usamos onboarding self-service.
 ---
 
 <section class="py-20 sm:py-28">
@@ -13,25 +15,25 @@ const APP_URL = 'https://pos.emprenddi.com/app';
 
       <div class="relative">
         <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight max-w-3xl mx-auto">
-          Empieza a vender hoy mismo.<br />
+          Listo para llevar tu negocio<br />
           <span class="bg-gradient-to-r from-amber-300 to-pink-300 bg-clip-text text-transparent">
-            30 días gratis, sin tarjeta.
+            al siguiente nivel.
           </span>
         </h2>
         <p class="mt-5 text-lg text-white/90 max-w-2xl mx-auto leading-relaxed">
-          Crea tu cuenta en 60 segundos. El sistema te configura el Plan de Cuentas,
-          los impuestos y todo lo necesario. Tú solo te concentras en vender.
+          Agenda una demo personalizada de 30 minutos. Te mostramos
+          exactamente cómo Emprenddi se adapta a tu negocio.
         </p>
 
         <div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
-          <a href={APP_URL + '/register'} class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-white hover:bg-slate-50 text-brand-700 font-bold text-base shadow-2xl transition-all duration-200">
-            Crear cuenta gratis
+          <a href="/contacto" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-white hover:bg-slate-50 text-brand-700 font-bold text-base shadow-2xl transition-all duration-200">
+            Solicitar demo
             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
             </svg>
           </a>
           <a href="mailto:comercial@emprenddi.com" class="btn-outline justify-center">
-            Agendar demo
+            Escríbenos al correo
           </a>
         </div>
       </div>

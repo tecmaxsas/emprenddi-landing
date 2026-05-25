@@ -155,7 +155,7 @@ const useCases = [
     emoji: '🚀',
     title: 'Negocio que arranca',
     client: 'Emprendedor abriendo su primera tienda',
-    description: 'Plan free-trial 30 días + capacitación inicial. Configuración automática al registrarte: el sistema te deja listo en minutos.',
+    description: 'Capacitación inicial + configuración automática. El sistema te deja listo en minutos para que solo te concentres en vender.',
     quote: 'No necesitas saber de contabilidad. El sistema lleva los libros y cuando vayas con tu contador, todo está cuadrado.',
   },
 ];
@@ -175,14 +175,14 @@ const diffs = [
 // ============ FAQ ============
 const faqs = [
   { question: '¿Funciona si se cae el internet?', answer: 'El sistema requiere conexión para vender. Recomendamos plan de internet con respaldo (4G del celular). Próximamente lanzaremos un modo sin conexión para zonas con internet inestable.' },
-  { question: '¿Mis datos están seguros?', answer: 'Sí. Servidores en Google Cloud, respaldos diarios automáticos, conexión cifrada. Cada empresa tiene sus datos aislados — nadie ve la información de otra.' },
+  { question: '¿Mis datos están seguros?', answer: 'Sí. Servidores con respaldos diarios automáticos, conexión cifrada SSL y aislamiento por empresa: cada cliente solo ve sus propios datos.' },
   { question: '¿Puedo migrar desde otro sistema?', answer: 'Sí. Cargamos los saldos contables iniciales con un asiento de apertura y el inventario inicial. La capacitación incluye toda la migración.' },
-  { question: '¿Cuánto tarda la implementación?', answer: 'Una sesión de configuración (2 horas) + una sesión de capacitación (2 horas). El cliente empieza a vender el mismo día.' },
-  { question: '¿Puedo facturar a la DIAN desde el día 1?', answer: 'La factura electrónica DIAN requiere que tengas ya tu resolución aprobada y tu certificado digital. Una vez los tengas, lo configuramos en 30 minutos.' },
-  { question: '¿Funciona para mi negocio en particular?', answer: 'Si vendes productos, servicios o ambos, sí. Tenemos clientes en retail, restaurantes, electrónica, ropa, talleres y distribuidores. Si tienes un caso especial, agenda una demo.' },
+  { question: '¿Cuánto tarda la implementación?', answer: 'Una sesión de configuración (2 horas) + una sesión de capacitación (2 horas). Empiezas a vender el mismo día.' },
+  { question: '¿Puedo facturar a la DIAN?', answer: 'Sí. El sistema emite factura electrónica DIAN integrándose con tu proveedor tecnológico autorizado. Necesitas tu resolución DIAN aprobada y tu certificado digital — una vez los tengas, lo configuramos en 30 minutos.' },
+  { question: '¿Funciona para mi negocio en particular?', answer: 'Si vendes productos, servicios o ambos, sí. Tenemos clientes en retail, restaurantes, electrónica, ropa, talleres y distribuidores. Si tienes un caso especial, <a href="/contacto" class="text-brand-600 font-semibold hover:underline">agenda una demo</a>.' },
   { question: '¿Funciona con mi impresora térmica?', answer: 'Sí. Cualquier impresora térmica que tu computador reconozca (Epson, Star, Citizen, genéricas) funciona con Emprenddi. Se instala un programa pequeño una sola vez.' },
   { question: '¿Tienen contador incluido?', answer: 'No. Emprenddi es el software contable. El contador es una persona externa. Te ofrecemos un <strong>Portal Contador</strong> para que el tuyo entre sin compartir clave contigo y maneje varias empresas a la vez.' },
-  { question: '¿Qué pasa al terminar la prueba?', answer: 'Eliges un plan pago y sigues operando. Los datos se conservan. Si no contratas, los datos quedan en pausa por 30 días por si decides reactivar.' },
+  { question: '¿Cómo se contrata?', answer: 'Solicita una demo desde el botón de arriba o escríbenos a <a href="mailto:comercial@emprenddi.com" class="text-brand-600 font-semibold hover:underline">comercial@emprenddi.com</a>. Te agendamos una llamada de 30 min, te mostramos el sistema con un caso adaptado a tu negocio, y de ahí coordinamos la implementación.' },
 ];
 ---
 
@@ -190,7 +190,7 @@ const faqs = [
   <!-- HERO -->
   <Hero />
 
-  <!-- LOGOS DE CONFIANZA / TRUST BAR (placeholder editable) -->
+  <!-- LOGOS DE CONFIANZA / TRUST BAR -->
   <section class="py-10 border-b border-slate-100">
     <div class="container-narrow">
       <p class="text-center text-xs font-semibold text-slate-500 uppercase tracking-widest mb-6">
@@ -201,13 +201,13 @@ const faqs = [
           🇨🇴 <span>Hecho en Colombia</span>
         </div>
         <div class="flex items-center gap-2 text-sm font-semibold">
-          📑 <span>Autorizado DIAN</span>
+          📑 <span>Factura electrónica DIAN</span>
         </div>
         <div class="flex items-center gap-2 text-sm font-semibold">
-          ☁️ <span>Google Cloud</span>
+          🔒 <span>Datos cifrados SSL</span>
         </div>
         <div class="flex items-center gap-2 text-sm font-semibold">
-          🔒 <span>SSL · datos cifrados</span>
+          ☁️ <span>Respaldos diarios</span>
         </div>
         <div class="flex items-center gap-2 text-sm font-semibold">
           🛟 <span>Soporte en español</span>
@@ -246,14 +246,14 @@ const faqs = [
     <div class="container-narrow">
       <div class="text-center mb-14">
         <span class="inline-block px-3 py-1 mb-4 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold uppercase tracking-widest">
-          Listo en 5 minutos
+          Implementación express
         </span>
         <h2 class="section-title">
-          Te registras y <span class="text-emerald-600">ya estás operando</span>
+          De cero a operando <span class="text-emerald-600">en 24 horas</span>
         </h2>
         <p class="section-subtitle">
-          Olvídate de las semanas de configuración. Emprenddi te deja
-          listo automáticamente con todo lo que tu negocio necesita.
+          Olvídate de las semanas de configuración. Nuestro proceso
+          de implementación deja tu negocio listo para vender el mismo día.
         </p>
       </div>
 
@@ -261,27 +261,27 @@ const faqs = [
         <!-- Paso 1 -->
         <div class="relative p-7 rounded-2xl bg-white border border-slate-200 hover:shadow-lg transition">
           <div class="absolute -top-4 -left-2 w-12 h-12 rounded-full bg-brand-600 text-white text-xl font-extrabold flex items-center justify-center shadow-lg">1</div>
-          <h3 class="text-xl font-bold mt-4 mb-3">Te registras en 60s</h3>
+          <h3 class="text-xl font-bold mt-4 mb-3">Solicita una demo</h3>
           <p class="text-sm text-slate-600 leading-relaxed">
-            Llenas un formulario corto con los datos de tu empresa y creas tu usuario administrador. Sin tarjeta de crédito.
+            Te mostramos el sistema con un caso adaptado a tu negocio en una llamada de 30 minutos. Sin compromiso.
           </p>
         </div>
 
         <!-- Paso 2 -->
         <div class="relative p-7 rounded-2xl bg-white border border-slate-200 hover:shadow-lg transition">
           <div class="absolute -top-4 -left-2 w-12 h-12 rounded-full bg-brand-600 text-white text-xl font-extrabold flex items-center justify-center shadow-lg">2</div>
-          <h3 class="text-xl font-bold mt-4 mb-3">Configuración automática</h3>
+          <h3 class="text-xl font-bold mt-4 mb-3">Configuramos tu cuenta</h3>
           <p class="text-sm text-slate-600 leading-relaxed">
-            En segundos quedan listos: Plan de Cuentas colombiano, IVA, retenciones, monedas, métodos de pago, tu sede principal y plantillas de impresión.
+            Te configuramos Plan de Cuentas colombiano, IVA, retenciones, métodos de pago, sedes, productos y plantillas de impresión.
           </p>
         </div>
 
         <!-- Paso 3 -->
         <div class="relative p-7 rounded-2xl bg-white border border-slate-200 hover:shadow-lg transition">
           <div class="absolute -top-4 -left-2 w-12 h-12 rounded-full bg-emerald-600 text-white text-xl font-extrabold flex items-center justify-center shadow-lg">3</div>
-          <h3 class="text-xl font-bold mt-4 mb-3">A vender</h3>
+          <h3 class="text-xl font-bold mt-4 mb-3">Capacitamos y arrancas</h3>
           <p class="text-sm text-slate-600 leading-relaxed">
-            Entras al POS, agregas tus productos y empiezas a facturar. Mientras vendes, el sistema lleva tu contabilidad solo.
+            Capacitamos a tu equipo (cajeros, administrativos, contador). Entras al POS, agregas tus productos y empiezas a facturar.
           </p>
         </div>
       </div>

@@ -1,0 +1,84 @@
+---
+import Base from '../layouts/Base.astro';
+
+// IMPORTANTE: este es un texto base inicial. Antes de publicar
+// definitivamente, debe ser revisado y ajustado por un asesor jurídico.
+// Edita los datos de la empresa (nombre, NIT, dirección) según los reales.
+const COMPANY = {
+  name: 'Emprenddi',
+  legal: 'Tecmax SAS',           // EDITAR con razón social real
+  nit: '900.000.000-0',          // EDITAR con NIT real
+  city: 'Bogotá D.C., Colombia', // EDITAR
+  email: 'comercial@emprenddi.com',
+  updated: '23 de mayo de 2026',
+};
+
+const secciones = [
+  ['Aceptación de los términos', `Al registrarte y utilizar ${COMPANY.name} aceptas de forma íntegra estos Términos y Condiciones y la Política de Tratamiento de Datos Personales. Si no estás de acuerdo, debes abstenerte de usar el servicio.`],
+  ['Definiciones', `"Plataforma" o "Servicio" se refiere a ${COMPANY.name}; "Cliente" o "Usuario" a la persona natural o jurídica que contrata o utiliza el servicio; "Cuenta" al registro de acceso individual.`],
+  ['Descripción del servicio', `${COMPANY.name} es una plataforma de gestión empresarial en modalidad de software como servicio (SaaS) que incluye contabilidad, facturación electrónica DIAN (transmitida a través de proveedores tecnológicos autorizados), inventario, punto de venta, nómina y módulos complementarios.`],
+  ['Registro y cuenta de usuario', 'Para usar el servicio debes crear una cuenta con información veraz, completa y actualizada. Eres responsable de la exactitud de los datos suministrados.'],
+  ['Seguridad de las credenciales', 'Eres responsable de mantener la confidencialidad de tus credenciales de acceso y de toda actividad realizada con tu cuenta. Debes notificarnos de inmediato cualquier uso no autorizado.'],
+  ['Uso aceptable', 'Te comprometes a utilizar la plataforma conforme a la ley y a no realizar acciones que afecten su seguridad, disponibilidad, integridad o la información de otros usuarios, ni a usarla para fines fraudulentos o ilícitos.'],
+  ['Información del cliente', `La información contable, comercial y operativa que cargas es de tu exclusiva propiedad y responsabilidad. ${COMPANY.name} la procesa únicamente para prestar el servicio y no la utiliza para fines distintos.`],
+  ['Planes, pagos y renovación', 'El servicio se presta mediante suscripción anual. Los precios, alcance y condiciones de renovación se informan al momento de la contratación y pueden actualizarse con previo aviso razonable.'],
+  ['Facturación electrónica y DIAN', `La emisión y transmisión de documentos electrónicos a la DIAN se realiza a través de proveedores tecnológicos autorizados con los que ${COMPANY.name} se integra. Depende de la correcta configuración por parte del cliente (resolución DIAN vigente, certificado digital) y de la disponibilidad de los servicios de la DIAN y del proveedor. ${COMPANY.name} no es responsable por interrupciones ajenas a su control.`],
+  ['Propiedad intelectual', `La plataforma, su software, marcas, diseño y contenidos son propiedad de ${COMPANY.legal} o de sus licenciantes. El uso del servicio no transfiere ningún derecho de propiedad intelectual al cliente.`],
+  ['Disponibilidad y soporte', 'Procuramos la mayor disponibilidad posible; sin embargo, el servicio se presta "tal cual" y pueden existir ventanas de mantenimiento o interrupciones. El alcance del soporte se describe en cada contrato.'],
+  ['Suspensión y terminación', 'Podemos suspender o terminar el acceso ante incumplimientos de estos términos o falta de pago. Cualquiera de las partes puede terminar la relación al vencimiento de la suscripción; conservas el derecho a exportar tu información durante un período razonable.'],
+  ['Limitación de responsabilidad', `En la medida permitida por la ley, ${COMPANY.name} no será responsable por daños indirectos, lucro cesante o pérdida de datos derivados del uso o la imposibilidad de uso de la plataforma.`],
+  ['Indemnidad', `El cliente se obliga a mantener indemne a ${COMPANY.legal} frente a reclamaciones de terceros derivadas del uso indebido del servicio o del incumplimiento de estos términos.`],
+  ['Modificaciones', 'Podemos actualizar estos Términos y Condiciones. Los cambios relevantes serán notificados a través de la plataforma o por correo electrónico y regirán desde su publicación.'],
+  ['Ley aplicable y controversias', `Estos términos se rigen por las leyes de la República de Colombia. Las controversias se resolverán ante los jueces competentes de ${COMPANY.city}, sin perjuicio de los mecanismos de solución amistosa.`],
+  ['Contacto', `Para dudas sobre estos términos puedes escribirnos a <a href="mailto:${COMPANY.email}" class="text-brand-600 hover:underline">${COMPANY.email}</a>.`],
+];
+---
+
+<Base
+  title="Términos y Condiciones · Emprenddi"
+  description="Términos y condiciones de uso de la plataforma Emprenddi."
+>
+  <!-- Header -->
+  <section class="bg-hero-gradient text-white py-14">
+    <div class="container-narrow text-center">
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">
+        Términos y Condiciones
+      </h1>
+      <p class="mt-3 text-sm text-white/80">
+        Última actualización: {COMPANY.updated}
+      </p>
+    </div>
+  </section>
+
+  <!-- Contenido -->
+  <section class="py-16">
+    <div class="container-narrow max-w-3xl">
+      <p class="text-lg text-slate-700 mb-10 leading-relaxed">
+        Estos Términos y Condiciones regulan el acceso y uso de la
+        plataforma <strong>{COMPANY.name}</strong>, operada por
+        <strong>{COMPANY.legal}</strong> (NIT {COMPANY.nit}), con domicilio
+        en {COMPANY.city}. Al crear una cuenta o utilizar el servicio,
+        el usuario declara haberlos leído y aceptado.
+      </p>
+
+      <div class="space-y-7">
+        {secciones.map(([titulo, contenido], i) => (
+          <div>
+            <h2 class="text-base font-bold text-slate-900 mb-2 flex gap-3 items-baseline">
+              <span class="text-brand-600 font-extrabold text-sm">{i + 1}.</span>
+              <span>{titulo}</span>
+            </h2>
+            <p class="text-slate-700 leading-relaxed pl-7" set:html={contenido}></p>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-14 pt-8 border-t border-slate-200 text-sm text-slate-500">
+        <p>¿Tienes preguntas? Escríbenos a <a href={`mailto:${COMPANY.email}`} class="text-brand-600 font-semibold hover:underline">{COMPANY.email}</a>.</p>
+        <p class="mt-2">
+          Ver también: <a href="/privacidad" class="text-brand-600 hover:underline">Política de Privacidad</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>

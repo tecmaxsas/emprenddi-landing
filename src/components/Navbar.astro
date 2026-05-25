@@ -1,10 +1,11 @@
 ---
 const APP_URL = 'https://pos.emprenddi.com/app';
 const navLinks = [
-  { href: '#features', label: 'Funcionalidades' },
-  { href: '#casos', label: 'Casos de uso' },
+  { href: '/#features', label: 'Funcionalidades' },
+  { href: '/#casos', label: 'Casos de uso' },
   { href: '/precios', label: 'Precios' },
-  { href: '#faq', label: 'Preguntas' },
+  { href: '/sobre-nosotros', label: 'Nosotros' },
+  { href: '/contacto', label: 'Contacto' },
 ];
 ---
 
@@ -38,10 +39,10 @@ const navLinks = [
         Iniciar sesión
       </a>
       <a
-        href={APP_URL + '/register'}
+        href="/contacto"
         class="inline-flex items-center gap-1 px-5 py-2 rounded-full bg-brand-600 hover:bg-brand-700 text-white text-sm font-semibold shadow-md shadow-brand-600/20 transition"
       >
-        Empieza gratis
+        Solicitar demo
       </a>
 
       <!-- Mobile menu button -->
