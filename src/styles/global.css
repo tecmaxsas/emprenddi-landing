@@ -2,16 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Reset list-style fuera de @layer para que tenga mas prioridad y NO
-   pueda ser sobrescrito por otros CSS layered (como starlight-tailwind).
-   Necesario porque applyBaseStyles:false desactiva el preflight de Tailwind.
-   El contenido de Starlight (.sl-markdown-content) reaplica bullets en docs.css. */
+/* Reset global fuera de @layer para que tenga mas prioridad y NO pueda ser
+   sobrescrito por otros CSS layered (como starlight-tailwind). Necesario
+   porque applyBaseStyles:false desactiva el preflight de Tailwind, asi que
+   los <ul> heredan bullets nativos y los <a> heredan subrayado nativo.
+   El contenido de Starlight (.sl-markdown-content) reaplica bullets y
+   subrayado en links via docs.css. */
 header ul, header ol,
 footer ul, footer ol,
 nav ul, nav ol {
   list-style: none !important;
   margin: 0;
   padding: 0;
+}
+/* Sin subrayado en links del chrome del sitio (navbar, footer). El subrayado
+   por defecto del navegador es feo y compite con el hover de color. */
+header a, footer a, nav a {
+  text-decoration: none !important;
 }
 
 @layer base {
