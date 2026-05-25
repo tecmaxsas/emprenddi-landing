@@ -1,0 +1,317 @@
+---
+import Base from '../layouts/Base.astro';
+import FeatureCard from '../components/FeatureCard.astro';
+import FAQItem from '../components/FAQItem.astro';
+import CTASection from '../components/CTASection.astro';
+
+// ============ Features filtradas al mundo restaurante ============
+const features = [
+  {
+    icon: '🪑',
+    title: 'Mapa de mesas en tiempo real',
+    accent: 'brand' as const,
+    items: [
+      'Zonas con colores (salón, terraza, barra)',
+      'Estado visual de cada mesa (libre, ocupada, reservada)',
+      'Transferir cuenta entre mesas con un clic',
+      'Juntar mesas para grupos grandes',
+    ],
+  },
+  {
+    icon: '🧑‍🍳',
+    title: 'Cocina (KDS) sin papelitos',
+    accent: 'amber' as const,
+    items: [
+      'Pantalla en cocina con pedidos en vivo',
+      'Comandas impresas automáticas por categoría',
+      'El cocinero marca "listo" y el mesero ve la notificación',
+      'Una impresora distinta para cocina y para barra',
+    ],
+  },
+  {
+    icon: '🍕',
+    title: 'Modificadores y combos',
+    accent: 'emerald' as const,
+    items: [
+      '"Sin queso", "con salsa extra", "punto de cocción"',
+      'Grupos obligatorios (escoge salsa) u opcionales',
+      'Pizza 1/2 + 1/2 con dos sabores y precios',
+      'Combos y promociones armados desde el catálogo',
+    ],
+  },
+  {
+    icon: '🍽️',
+    title: 'Cursos: entrada, fuerte, postre',
+    accent: 'purple' as const,
+    items: [
+      'Envía a cocina por cursos (no todo de una)',
+      'El cocinero sabe el orden de servida',
+      'Cliente recibe los platos en el tiempo correcto',
+    ],
+  },
+  {
+    icon: '💵',
+    title: 'División de cuenta y propinas',
+    accent: 'amber' as const,
+    items: [
+      'Divide el total entre comensales (en partes iguales o por ítem)',
+      'Propina sugerida (5%, 10%, 15%) o monto fijo',
+      'Asiento contable de propina por pagar al staff',
+    ],
+  },
+  {
+    icon: '🛵',
+    title: 'Domicilios completos',
+    accent: 'rose' as const,
+    items: [
+      'Asigna repartidor a cada pedido',
+      'Tracking público para el cliente (link compartible)',
+      'Cuadre de domicilios por turno',
+      'Tarifa de domicilio configurable por zona',
+    ],
+  },
+  {
+    icon: '📅',
+    title: 'Reservaciones',
+    accent: 'brand' as const,
+    items: [
+      'Agenda con calendario',
+      'Mesa sugerida según número de personas',
+      'Aviso al equipo cuando llega un cliente con reserva',
+      'Marca llegadas y "no shows"',
+    ],
+  },
+  {
+    icon: '📱',
+    title: 'Carta digital QR',
+    accent: 'emerald' as const,
+    items: [
+      'El cliente escanea el QR de la mesa y ve la carta en su celular',
+      'Tu carta actualizada en tiempo real cuando cambia el menú',
+      'Fotos de cada plato con descripción',
+      'Funciona sin app — solo navegador',
+    ],
+  },
+  {
+    icon: '🍔',
+    title: 'IVA diferencial comer aquí / para llevar',
+    accent: 'purple' as const,
+    items: [
+      'INC del 8% para consumo en sitio',
+      'IVA 0% para domicilio o para llevar (según norma)',
+      'El sistema aplica el impuesto correcto automáticamente',
+    ],
+  },
+];
+
+const faqs = [
+  { question: '¿Funciona en mesas con tablet o solo en caja?', answer: 'Funciona en cualquier dispositivo con navegador: caja, tablet del mesero, celular. Como es web no requiere instalación. El mismo mesero puede tomar el pedido en la mesa con la tablet y se actualiza en cocina al instante.' },
+  { question: '¿Imprime las comandas en la cocina automáticamente?', answer: 'Sí. Configuras una impresora térmica con propósito "Cocina" y otra "Barra". Cada producto va a la impresora correcta según su categoría: bebidas → barra, comidas → cocina. Usamos QZ Tray (un programa pequeño y gratuito que instalas una vez).' },
+  { question: '¿Cómo se manejan los meseros y su comisión?', answer: 'Cada mesero tiene su propio usuario en el sistema. Cada pedido queda registrado a su nombre. Puedes ver al final del día cuánto vendió cada mesero y calcular su comisión automáticamente.' },
+  { question: '¿La carta digital QR es difícil de configurar?', answer: 'No. Creas el menú con tus categorías y platos, generamos el QR con un link tipo emprenddi.com/menu/tu-pizzeria, lo imprimes y lo pones en cada mesa. Cuando cambies un precio, el QR muestra el nuevo precio al instante — sin re-imprimir.' },
+  { question: '¿Puedo dividir la cuenta entre 4 personas?', answer: 'Sí, en dos modos: <strong>partes iguales</strong> (divide el total entre N) o <strong>por ítem</strong> (asignas cada producto a una etiqueta A, B, C y se generan facturas separadas). Cada cuenta se cobra con su propio método de pago.' },
+  { question: '¿Cómo funcionan las propinas?', answer: 'Al cobrar la cuenta el sistema sugiere porcentajes (5%, 10%, 15%) o permite digitar un monto fijo. La propina se registra como un pasivo contable (218505 Propinas por pagar) para que sea distinguible de la venta — útil para liquidar al staff a fin de mes.' },
+  { question: '¿Se pueden manejar varios menús (almuerzo y noche)?', answer: 'Sí. Puedes tener varios menús activos al tiempo, cada uno con sus productos y horario. El POS muestra solo los productos disponibles en cada turno.' },
+  { question: '¿Y si tengo varios restaurantes o sucursales?', answer: 'Sin problema. Cada sede tiene su propio inventario, sus propios meseros y sus propias mesas. Reportes consolidados o por sede según necesidad.' },
+];
+---
+
+<Base
+  title="Software POS para Restaurantes en Colombia · Emprenddi"
+  description="POS de restaurante con mapa de mesas, KDS, comandas a cocina, modificadores, división de cuenta, propinas, domicilios y carta digital QR. Para restaurantes, pizzerías, bares y cafeterías en Colombia."
+  faqs={faqs}
+>
+  <!-- HERO específico -->
+  <section class="relative overflow-hidden bg-hero-gradient text-white">
+    <div class="absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-20 bg-amber-300 pointer-events-none" style="transform: translate(30%, -30%);"></div>
+    <div class="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full blur-3xl opacity-15 bg-accent-500 pointer-events-none" style="transform: translate(-30%, 30%);"></div>
+
+    <div class="container-narrow relative py-20 sm:py-28">
+      <div class="max-w-3xl mx-auto text-center">
+        <span class="inline-block px-3 py-1 mb-5 rounded-full bg-white/15 backdrop-blur text-xs font-bold uppercase tracking-widest border border-white/20">
+          🍕 Software para restaurantes
+        </span>
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1]">
+          Tu restaurante,<br />
+          <span class="bg-gradient-to-r from-amber-300 to-pink-300 bg-clip-text text-transparent">
+            sin caos en cocina.
+          </span>
+        </h1>
+        <p class="mt-6 text-lg sm:text-xl text-white/90 leading-relaxed">
+          Mesas, cocina, modificadores, propinas, domicilios y carta QR.
+          <strong>Toda la operación del restaurante en una sola plataforma.</strong>
+        </p>
+        <div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
+          <a href="/contacto" class="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-white hover:bg-slate-50 text-brand-700 font-bold text-base shadow-xl transition">
+            Solicitar demo
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+          <a href="#features-restaurante" class="btn-outline justify-center">
+            Ver funcionalidades
+          </a>
+        </div>
+
+        <!-- Stats / trust visual -->
+        <div class="mt-12 grid grid-cols-3 gap-4 max-w-2xl mx-auto text-center">
+          <div>
+            <div class="text-2xl sm:text-3xl font-extrabold">2 min</div>
+            <div class="text-xs sm:text-sm text-white/70 mt-1">para cerrar una mesa</div>
+          </div>
+          <div class="border-x border-white/20">
+            <div class="text-2xl sm:text-3xl font-extrabold">0</div>
+            <div class="text-xs sm:text-sm text-white/70 mt-1">papelitos a cocina</div>
+          </div>
+          <div>
+            <div class="text-2xl sm:text-3xl font-extrabold">+15%</div>
+            <div class="text-xs sm:text-sm text-white/70 mt-1">propinas en promedio</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="relative h-12 -mb-px">
+      <svg class="absolute bottom-0 left-0 w-full h-full" viewBox="0 0 1440 48" preserveAspectRatio="none">
+        <path d="M0,48 L0,24 Q360,0 720,24 T1440,24 L1440,48 Z" fill="white"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- PROBLEMAS QUE RESUELVE -->
+  <section class="py-20 sm:py-24 bg-white">
+    <div class="container-narrow max-w-4xl">
+      <div class="text-center mb-12 reveal">
+        <span class="inline-block px-3 py-1 mb-4 rounded-full bg-rose-100 text-rose-700 text-xs font-bold uppercase tracking-widest">
+          ¿Te suena familiar?
+        </span>
+        <h2 class="section-title">Los dolores típicos de un restaurante</h2>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-5 reveal reveal-delay-1">
+        <div class="p-5 rounded-2xl bg-rose-50 border border-rose-100">
+          <div class="text-3xl mb-2">😤</div>
+          <h3 class="font-bold text-rose-900 mb-1">"Los meseros pierden pedidos"</h3>
+          <p class="text-sm text-rose-800">Comandas mal escritas, papelitos perdidos, productos olvidados.</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-rose-50 border border-rose-100">
+          <div class="text-3xl mb-2">⏰</div>
+          <h3 class="font-bold text-rose-900 mb-1">"Cocina y barra se trancan"</h3>
+          <p class="text-sm text-rose-800">No saben qué orden va primero ni quién pidió qué modificación.</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-rose-50 border border-rose-100">
+          <div class="text-3xl mb-2">💸</div>
+          <h3 class="font-bold text-rose-900 mb-1">"No sé cuánto se llevan los meseros en propinas"</h3>
+          <p class="text-sm text-rose-800">Sin registro contable claro, problemas a fin de mes.</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-rose-50 border border-rose-100">
+          <div class="text-3xl mb-2">📋</div>
+          <h3 class="font-bold text-rose-900 mb-1">"Mi contabilidad no cuadra"</h3>
+          <p class="text-sm text-rose-800">El cuaderno del cajero vs el inventario vs los pagos no coinciden.</p>
+        </div>
+      </div>
+
+      <div class="text-center mt-10 reveal reveal-delay-2">
+        <p class="text-lg text-slate-700">
+          <strong>Emprenddi resuelve todo eso en un solo sistema integrado.</strong>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features-restaurante" class="py-20 sm:py-28 bg-slate-50">
+    <div class="container-narrow">
+      <div class="text-center mb-14 reveal">
+        <span class="inline-block px-3 py-1 mb-4 rounded-full bg-brand-100 text-brand-700 text-xs font-bold uppercase tracking-widest">
+          Funcionalidades
+        </span>
+        <h2 class="section-title">
+          Pensado para <span class="bg-gradient-to-r from-amber-500 to-rose-500 bg-clip-text text-transparent">restaurantes reales</span>
+        </h2>
+        <p class="section-subtitle">
+          Cada funcionalidad nació de pelear con un mesero o un cocinero
+          en una cocina real. No es genérico — está hecho para tu día a día.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 reveal reveal-delay-1">
+        {features.map((f) => <FeatureCard {...f} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- CASOS DE USO ESPECÍFICOS -->
+  <section class="py-20 sm:py-28">
+    <div class="container-narrow">
+      <div class="text-center mb-12 reveal">
+        <span class="inline-block px-3 py-1 mb-4 rounded-full bg-amber-100 text-amber-700 text-xs font-bold uppercase tracking-widest">
+          Casos de uso
+        </span>
+        <h2 class="section-title">Funciona para todo tipo de restaurante</h2>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto reveal reveal-delay-1">
+        {[
+          { emoji: '🍕', title: 'Pizzerías', desc: 'Half-and-half para pizzas de dos sabores, modificadores de masa y adiciones, domicilios con tarifa por zona.' },
+          { emoji: '🍔', title: 'Restaurantes casuales', desc: 'Mesas + para llevar, IVA diferencial, modificadores por plato, división de cuenta entre amigos.' },
+          { emoji: '☕', title: 'Cafeterías', desc: 'Carta corta con modificadores (sin azúcar, deslactosada, doble shot), KDS para barista, propinas digitales.' },
+          { emoji: '🍻', title: 'Bares y pubs', desc: 'Mesas con tab abierto que se acumula durante la noche, división por persona al cierre, control de stock de licores.' },
+          { emoji: '🥖', title: 'Panaderías y reposterías', desc: 'POS rápido con código de barras, productos por peso, pedidos para llevar con anticipación.' },
+          { emoji: '🌮', title: 'Comida rápida', desc: 'Cobro express en mostrador, comandas directas a cocina, KDS, sin servicio en mesa.' },
+        ].map(({ emoji, title, desc }) => (
+          <div class="p-6 rounded-2xl bg-white border border-slate-200 hover:border-brand-300 hover:shadow-lg transition">
+            <div class="text-4xl mb-3">{emoji}</div>
+            <h3 class="text-lg font-bold text-slate-900 mb-2">{title}</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">{desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- INCLUYE TODO LO DEMÁS -->
+  <section class="py-20 bg-slate-50">
+    <div class="container-narrow max-w-3xl text-center reveal">
+      <h2 class="section-title">Y también incluye todo el back-office</h2>
+      <p class="section-subtitle">
+        Porque un restaurante necesita más que un POS de mesas.
+      </p>
+
+      <div class="mt-10 grid sm:grid-cols-2 gap-4 text-left">
+        {[
+          ['📑 Facturación electrónica DIAN', 'Cada venta genera factura DIAN sin que el cajero haga nada extra.'],
+          ['📦 Inventario de insumos', 'Receta por plato. Cuando vendes una pizza, descuenta queso, harina y salsa del inventario.'],
+          ['💼 Contabilidad automática', 'Cada venta, gasto y nómina genera el asiento contable correcto sin intervención.'],
+          ['👨‍💼 Nómina y propinas', 'Liquida nómina mensual con prima, cesantías y reparto de propinas al staff.'],
+        ].map(([title, desc]) => (
+          <div class="p-5 rounded-xl bg-white border border-slate-200">
+            <h3 class="font-bold text-slate-900 mb-1">{title}</h3>
+            <p class="text-sm text-slate-600">{desc}</p>
+          </div>
+        ))}
+      </div>
+
+      <a href="/#features" class="inline-block mt-8 text-brand-600 hover:underline font-semibold">
+        Ver todas las funcionalidades →
+      </a>
+    </div>
+  </section>
+
+  <!-- FAQ específica de restaurante -->
+  <section class="py-20">
+    <div class="container-narrow max-w-3xl">
+      <div class="text-center mb-10 reveal">
+        <span class="inline-block px-3 py-1 mb-4 rounded-full bg-rose-100 text-rose-700 text-xs font-bold uppercase tracking-widest">
+          Preguntas frecuentes
+        </span>
+        <h2 class="section-title">Preguntas específicas de restaurante</h2>
+      </div>
+      <div class="reveal reveal-delay-1">
+        {faqs.map((f) => <FAQItem question={f.question} answer={f.answer} />)}
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</Base>

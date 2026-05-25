@@ -1,0 +1,84 @@
+---
+import Base from '../../layouts/Base.astro';
+import CTASection from '../../components/CTASection.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime());
+
+// Categorías únicas
+const categories = [...new Set(posts.map((p) => p.data.category))];
+const fmt = (d: Date) => d.toLocaleDateString('es-CO', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<Base
+  title="Blog · Emprenddi · Guías de facturación electrónica, contabilidad y POS"
+  description="Consejos, guías y novedades sobre facturación electrónica DIAN, contabilidad colombiana, POS, inventario y nómina para PyMEs."
+>
+  <!-- Header -->
+  <section class="bg-hero-gradient text-white py-16 sm:py-20">
+    <div class="container-narrow text-center">
+      <span class="inline-block px-3 py-1 mb-5 rounded-full bg-white/15 backdrop-blur text-xs font-bold uppercase tracking-widest border border-white/20">
+        Blog
+      </span>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
+        Guías para hacer crecer<br />
+        <span class="bg-gradient-to-r from-amber-300 to-pink-300 bg-clip-text text-transparent">
+          tu negocio en Colombia
+        </span>
+      </h1>
+      <p class="mt-5 text-lg text-white/90 max-w-2xl mx-auto">
+        Facturación electrónica DIAN, contabilidad, POS, inventario,
+        nómina — explicado sin terminología técnica.
+      </p>
+    </div>
+  </section>
+
+  <!-- Categorías chips -->
+  <section class="py-10 border-b border-slate-100">
+    <div class="container-narrow flex flex-wrap justify-center gap-2">
+      <span class="px-4 py-1.5 rounded-full bg-brand-600 text-white text-sm font-semibold">
+        Todos
+      </span>
+      {categories.map((cat) => (
+        <span class="px-4 py-1.5 rounded-full bg-slate-100 text-slate-700 text-sm font-semibold">
+          {cat}
+        </span>
+      ))}
+    </div>
+  </section>
+
+  <!-- Grid de posts -->
+  <section class="py-16">
+    <div class="container-narrow">
+      {posts.length === 0 ? (
+        <p class="text-center text-slate-500 py-20">Aún no hay artículos publicados. ¡Pronto!</p>
+      ) : (
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {posts.map((post) => (
+            <a
+              href={`/blog/${post.id}`}
+              class="group block p-6 rounded-2xl bg-white border border-slate-200 hover:border-brand-300 hover:shadow-xl hover:shadow-brand-500/5 transition-all reveal"
+            >
+              <span class="inline-block px-2.5 py-0.5 rounded-full bg-brand-50 text-brand-700 text-[10px] font-bold uppercase tracking-wider mb-3">
+                {post.data.category}
+              </span>
+              <h2 class="text-lg font-bold text-slate-900 mb-2 leading-snug group-hover:text-brand-700 transition">
+                {post.data.title}
+              </h2>
+              <p class="text-sm text-slate-600 leading-relaxed line-clamp-3">
+                {post.data.description}
+              </p>
+              <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                <span>{fmt(post.data.publishedAt)}</span>
+                <span>{post.data.readingMinutes} min lectura</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <CTASection />
+</Base>

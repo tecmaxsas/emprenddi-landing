@@ -1,0 +1,132 @@
+---
+// Banner informativo de cookies (Ley 1581/2012). No bloquea scripts
+// porque hoy no usamos cookies de tracking — solo cookies funcionales
+// (sesión y seguridad). Si más adelante metes GA4 o Clarity, refactor
+// para bloquear scripts hasta que el usuario acepte.
+---
+
+<div id="cookie-banner" class="cookie-banner" role="region" aria-label="Aviso de cookies">
+  <div class="cookie-banner__inner">
+    <div class="cookie-banner__copy">
+      <strong>🍪 Cookies</strong>
+      Usamos cookies necesarias para el funcionamiento del sitio. No
+      compartimos tu información con terceros con fines comerciales.
+      <a href="/privacidad" class="cookie-banner__link">Lee nuestra política de privacidad.</a>
+    </div>
+    <div class="cookie-banner__actions">
+      <button type="button" class="cookie-banner__btn cookie-banner__btn--ghost" data-cookie-action="reject">
+        Solo necesarias
+      </button>
+      <button type="button" class="cookie-banner__btn cookie-banner__btn--primary" data-cookie-action="accept">
+        Aceptar todas
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .cookie-banner {
+    position: fixed;
+    bottom: 0;
+    inset-inline: 0;
+    z-index: 95;
+    background: #0f172a;
+    color: #e2e8f0;
+    box-shadow: 0 -10px 30px rgba(0,0,0,0.25);
+    transform: translateY(110%);
+    transition: transform 360ms cubic-bezier(.22,1,.36,1);
+  }
+  .cookie-banner.is-visible {
+    transform: translateY(0);
+  }
+  .cookie-banner__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 14px 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  @media (min-width: 768px) {
+    .cookie-banner__inner {
+      flex-direction: row;
+      align-items: center;
+      gap: 18px;
+      padding: 16px 24px;
+    }
+  }
+  .cookie-banner__copy {
+    flex: 1;
+    font-size: 13px;
+    line-height: 1.55;
+  }
+  .cookie-banner__copy strong { color: #ffffff; margin-right: 4px; }
+  .cookie-banner__link { color: #a5b4fc; text-decoration: underline; }
+  .cookie-banner__link:hover { color: #c7d2fe; }
+  .cookie-banner__actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+  .cookie-banner__btn {
+    padding: 9px 18px;
+    border-radius: 999px;
+    border: 0;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 150ms;
+    font-family: inherit;
+  }
+  .cookie-banner__btn--ghost {
+    background: transparent;
+    color: #e2e8f0;
+    border: 1px solid #334155;
+  }
+  .cookie-banner__btn--ghost:hover {
+    background: rgba(255,255,255,0.05);
+    border-color: #475569;
+  }
+  .cookie-banner__btn--primary {
+    background: #6366f1;
+    color: #ffffff;
+  }
+  .cookie-banner__btn--primary:hover {
+    background: #4f46e5;
+  }
+  /* En móvil, considera el sticky-mobile-cta y WA button — sube el banner */
+  @media (max-width: 767px) {
+    .cookie-banner { bottom: 0; }
+  }
+</style>
+
+<script is:inline>
+  // Persistencia en localStorage. Si el usuario ya respondió, no mostrar.
+  (function () {
+    const STORAGE_KEY = 'emprenddi_cookies_v1';
+    const banner = document.getElementById('cookie-banner');
+    if (!banner) return;
+
+    let stored = null;
+    try { stored = localStorage.getItem(STORAGE_KEY); } catch (_) {}
+    if (stored) return; // ya decidió
+
+    // Mostrar tras 800ms para no estorbar la carga inicial
+    setTimeout(() => banner.classList.add('is-visible'), 800);
+
+    banner.querySelectorAll('[data-cookie-action]').forEach((btn) => {
+      btn.addEventListener('click', function () {
+        const action = btn.getAttribute('data-cookie-action');
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify({
+            value: action, // 'accept' | 'reject'
+            at: new Date().toISOString(),
+          }));
+        } catch (_) {}
+        banner.classList.remove('is-visible');
+        // Limpia del DOM tras la animación
+        setTimeout(() => banner.remove(), 400);
+      });
+    });
+  })();
+</script>

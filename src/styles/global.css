@@ -16,6 +16,29 @@
   .container-narrow {
     @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
   }
+
+  /* Reveal-on-scroll: añade `.reveal` a cualquier elemento.
+     El script reveal.js le mete `.is-visible` cuando entra al viewport. */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 600ms cubic-bezier(.22,1,.36,1),
+                transform 600ms cubic-bezier(.22,1,.36,1);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  /* Variantes con delay para staggered */
+  .reveal-delay-1 { transition-delay: 80ms; }
+  .reveal-delay-2 { transition-delay: 160ms; }
+  .reveal-delay-3 { transition-delay: 240ms; }
+  .reveal-delay-4 { transition-delay: 320ms; }
+  /* Accesibilidad: usuarios que prefieren reducir movimiento */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
+
   .btn-primary {
     @apply inline-flex items-center gap-2 px-6 py-3 rounded-full bg-brand-600 hover:bg-brand-700 text-white font-semibold shadow-lg shadow-brand-600/30 hover:shadow-xl hover:shadow-brand-600/40 transition-all duration-200;
   }

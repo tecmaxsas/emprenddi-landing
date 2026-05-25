@@ -1,0 +1,172 @@
+---
+import Base from '../../layouts/Base.astro';
+import CTASection from '../../components/CTASection.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const fmt = (d: Date) => d.toLocaleDateString('es-CO', { day: 'numeric', month: 'long', year: 'numeric' });
+
+// Artículos relacionados (mismas categoría, otros 3)
+const all = await getCollection('blog', ({ data }) => !data.draft);
+const related = all
+  .filter((p) => p.id !== post.id && p.data.category === post.data.category)
+  .slice(0, 3);
+---
+
+<Base
+  title={`${post.data.title} · Blog Emprenddi`}
+  description={post.data.description}
+>
+  <!-- Header -->
+  <article class="py-16 sm:py-20">
+    <div class="container-narrow max-w-3xl">
+      <!-- Meta -->
+      <div class="text-center mb-8">
+        <a href="/blog" class="text-sm text-brand-600 font-semibold hover:underline">← Volver al blog</a>
+        <span class="inline-block mt-4 mb-3 px-3 py-1 rounded-full bg-brand-50 text-brand-700 text-xs font-bold uppercase tracking-widest">
+          {post.data.category}
+        </span>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-tight">
+          {post.data.title}
+        </h1>
+        <p class="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
+          {post.data.description}
+        </p>
+        <div class="mt-6 flex justify-center gap-4 text-sm text-slate-500">
+          <span>📅 {fmt(post.data.publishedAt)}</span>
+          <span>·</span>
+          <span>⏱ {post.data.readingMinutes} min de lectura</span>
+          <span>·</span>
+          <span>✍ {post.data.author}</span>
+        </div>
+      </div>
+
+      <!-- Contenido del post -->
+      <div class="blog-prose">
+        <Content />
+      </div>
+
+      <!-- Tags -->
+      {post.data.tags.length > 0 && (
+        <div class="mt-12 pt-8 border-t border-slate-200">
+          <div class="flex flex-wrap gap-2">
+            {post.data.tags.map((tag) => (
+              <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-medium">
+                #{tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </article>
+
+  <!-- Relacionados -->
+  {related.length > 0 && (
+    <section class="py-16 bg-slate-50">
+      <div class="container-narrow max-w-5xl">
+        <h2 class="text-2xl font-extrabold text-slate-900 mb-8 text-center">
+          Sigue leyendo
+        </h2>
+        <div class="grid sm:grid-cols-3 gap-5">
+          {related.map((p) => (
+            <a
+              href={`/blog/${p.id}`}
+              class="group block p-6 rounded-2xl bg-white border border-slate-200 hover:border-brand-300 hover:shadow-lg transition"
+            >
+              <span class="inline-block px-2.5 py-0.5 rounded-full bg-brand-50 text-brand-700 text-[10px] font-bold uppercase tracking-wider mb-3">
+                {p.data.category}
+              </span>
+              <h3 class="text-base font-bold text-slate-900 leading-snug group-hover:text-brand-700 transition">
+                {p.data.title}
+              </h3>
+              <div class="mt-3 text-xs text-slate-500">{fmt(p.data.publishedAt)}</div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <CTASection />
+</Base>
+
+<style is:global>
+  /* Tipografía del post (prose-like sin plugin Typography para
+     mantener bundle pequeño). */
+  .blog-prose {
+    color: #334155;
+    font-size: 17px;
+    line-height: 1.75;
+    max-width: 65ch;
+    margin: 0 auto;
+  }
+  .blog-prose h2 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin-top: 2.5em;
+    margin-bottom: 0.6em;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+  }
+  .blog-prose h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-top: 1.8em;
+    margin-bottom: 0.5em;
+    line-height: 1.3;
+  }
+  .blog-prose p { margin: 1em 0; }
+  .blog-prose strong { color: #0f172a; font-weight: 700; }
+  .blog-prose a { color: #4f46e5; font-weight: 600; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+  .blog-prose a:hover { color: #4338ca; }
+  .blog-prose ul, .blog-prose ol { margin: 1em 0; padding-left: 1.5em; }
+  .blog-prose ul li { list-style: disc; margin: 0.4em 0; }
+  .blog-prose ol li { list-style: decimal; margin: 0.4em 0; }
+  .blog-prose blockquote {
+    border-left: 4px solid #6366f1;
+    background: #eef2ff;
+    padding: 1em 1.25em;
+    margin: 1.5em 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: #1e1b4b;
+  }
+  .blog-prose blockquote p:first-child { margin-top: 0; }
+  .blog-prose blockquote p:last-child { margin-bottom: 0; }
+  .blog-prose code {
+    background: #f3f4f6;
+    color: #4338ca;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.92em;
+    font-family: ui-monospace, monospace;
+  }
+  .blog-prose pre {
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 1.25em;
+    border-radius: 12px;
+    overflow-x: auto;
+    margin: 1.5em 0;
+    font-size: 0.92em;
+    line-height: 1.6;
+  }
+  .blog-prose pre code { background: transparent; color: inherit; padding: 0; }
+  .blog-prose hr { border: 0; border-top: 1px dashed #cbd5e1; margin: 2.5em 0; }
+  .blog-prose img { border-radius: 12px; margin: 1.5em 0; }
+  .blog-prose table { width: 100%; border-collapse: collapse; margin: 1.5em 0; font-size: 0.95em; }
+  .blog-prose th { background: #f1f5f9; padding: 8px 12px; text-align: left; font-weight: 700; }
+  .blog-prose td { padding: 8px 12px; border-top: 1px solid #e5e7eb; }
+</style>
