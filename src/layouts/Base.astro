@@ -1,23 +1,160 @@
 ---
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
 import '../styles/global.css';
 
 interface Props {
   title?: string;
   description?: string;
   canonical?: string;
+  ogImage?: string;
+  /** Lista opcional de FAQs para schema.org FAQ */
+  faqs?: Array<{ question: string; answer: string }>;
 }
 
+const SITE_URL = 'https://emprenddi.com';
+const DEFAULT_TITLE = 'Emprenddi · Software contable, POS y facturación electrónica DIAN para PyMEs en Colombia';
+const DEFAULT_DESCRIPTION = 'Software contable, POS, facturación electrónica DIAN, inventario y nómina para PyMEs colombianas. Tienda, restaurante, electrónica. Todo en una sola plataforma. Solicita una demo.';
+
 const {
-  title = 'Emprenddi · Plataforma todo-en-uno para tu negocio en Colombia',
-  description = 'Vende, controla tu inventario, lleva tu contabilidad y factura a la DIAN en un solo lugar. Software contable y POS para PyMEs colombianas. Solicita una demo.',
-  canonical = Astro.url.href,
+  title = DEFAULT_TITLE,
+  description = DEFAULT_DESCRIPTION,
+  canonical = new URL(Astro.url.pathname, SITE_URL).href,
+  ogImage = SITE_URL + '/logos/logo_emprenddi.png',
+  faqs,
 } = Astro.props;
+
+// Keywords concentradas para SEO local Colombia
+const keywords = [
+  'software contable colombia',
+  'software contable PyMEs',
+  'facturación electrónica DIAN',
+  'POS Colombia',
+  'punto de venta restaurante',
+  'software de inventario Colombia',
+  'sistema contable colombiano',
+  'POS contabilidad integrado',
+  'software contable y POS',
+  'nómina electrónica DIAN',
+  'PUC colombiano automático',
+  'kardex inventario',
+  'documento electrónico DIAN',
+  'sistema para tienda Colombia',
+  'sistema para restaurante Colombia',
+  'sistema para electrónica con seriales',
+  'Tecmax Emprenddi',
+].join(', ');
+
+// ============ Schema.org JSON-LD ============
+// Organization + SoftwareApplication + LocalBusiness — ayudan a Google
+// a entender que somos una empresa en Bogotá que vende un SaaS contable.
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': SITE_URL + '/#organization',
+      name: 'Emprenddi',
+      legalName: 'Tecmax SAS',
+      url: SITE_URL,
+      logo: SITE_URL + '/logos/logo_emprenddi.png',
+      sameAs: [],
+      contactPoint: {
+        '@type': 'ContactPoint',
+        telephone: '+57-314-440-5766',
+        contactType: 'sales',
+        email: 'comercial@emprenddi.com',
+        areaServed: 'CO',
+        availableLanguage: 'Spanish',
+      },
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Carrera 15 #78 - 33, Local 2-255 / 2-211, Unilago',
+        addressLocality: 'Bogotá',
+        addressRegion: 'Cundinamarca',
+        addressCountry: 'CO',
+      },
+      taxID: '900642123-7',
+    },
+    {
+      '@type': 'SoftwareApplication',
+      '@id': SITE_URL + '/#software',
+      name: 'Emprenddi',
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: 'Web',
+      description: 'Plataforma SaaS de contabilidad, POS, facturación electrónica DIAN, inventario y nómina para PyMEs colombianas.',
+      url: SITE_URL,
+      offers: {
+        '@type': 'Offer',
+        price: '1600000',
+        priceCurrency: 'COP',
+        priceValidUntil: '2026-12-31',
+        description: 'Plan anual con todo incluido. Usuarios y sedes ilimitados.',
+        url: SITE_URL + '/precios',
+      },
+      provider: { '@id': SITE_URL + '/#organization' },
+      featureList: [
+        'POS con código de barras',
+        'POS Restaurante con KDS',
+        'Inventario por sede con promedio ponderado',
+        'Facturación electrónica DIAN',
+        'Plan Único de Cuentas colombiano',
+        'Asientos contables automáticos',
+        'Nómina con prestaciones legales',
+        'Garantías y servicio técnico',
+        'Información exógena DIAN',
+        'Multi-sede',
+      ],
+    },
+    {
+      '@type': 'LocalBusiness',
+      '@id': SITE_URL + '/#localbusiness',
+      name: 'Emprenddi · Tecmax SAS',
+      image: SITE_URL + '/logos/logo_emprenddi.png',
+      url: SITE_URL,
+      telephone: '+57-314-440-5766',
+      priceRange: 'COP 1.600.000/año',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Carrera 15 #78 - 33, Local 2-255 / 2-211, Unilago',
+        addressLocality: 'Bogotá',
+        addressRegion: 'Cundinamarca',
+        postalCode: '110221',
+        addressCountry: 'CO',
+      },
+      openingHoursSpecification: [
+        {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+          opens: '08:00',
+          closes: '18:00',
+        },
+      ],
+    },
+  ],
+};
+
+// FAQ schema opcional cuando la página pasa faqs
+const faqSchema = faqs && faqs.length > 0
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(({ question, answer }) => ({
+        '@type': 'Question',
+        name: question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          // Quita HTML simple del answer para schema
+          text: answer.replace(/<[^>]*>/g, ''),
+        },
+      })),
+    }
+  : null;
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es-CO">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -25,25 +162,40 @@ const {
 
   <title>{title}</title>
   <meta name="description" content={description} />
+  <meta name="keywords" content={keywords} />
+  <meta name="author" content="Emprenddi · Tecmax SAS" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="googlebot" content="index, follow" />
   <link rel="canonical" href={canonical} />
+
+  <!-- Geo tags Colombia / Bogotá -->
+  <meta name="geo.region" content="CO-DC" />
+  <meta name="geo.placename" content="Bogotá" />
+  <meta name="geo.position" content="4.667;-74.058" />
+  <meta name="ICBM" content="4.667, -74.058" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Emprenddi" />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:url" content={canonical} />
-  <meta property="og:image" content="/logos/logo_emprenddi.png" />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Emprenddi · Software contable y POS para Colombia" />
   <meta property="og:locale" content="es_CO" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
-  <meta name="twitter:image" content="/logos/logo_emprenddi.png" />
+  <meta name="twitter:image" content={ogImage} />
 
   <!-- Favicons -->
   <link rel="icon" type="image/svg+xml" href="/logos/favicon_emprenddi.svg" />
   <link rel="icon" type="image/png" href="/logos/favicon_emprenddi.png" />
+  <link rel="apple-touch-icon" href="/logos/favicon_emprenddi.png" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -52,6 +204,20 @@ const {
 
   <!-- Theme color -->
   <meta name="theme-color" content="#4f46e5" />
+  <meta name="msapplication-TileColor" content="#4f46e5" />
+
+  <!-- Idioma alternativo -->
+  <link rel="alternate" hreflang="es-CO" href={canonical} />
+  <link rel="alternate" hreflang="x-default" href={canonical} />
+
+  <!-- Sitemap hint -->
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json" set:html={JSON.stringify(orgSchema)}></script>
+  {faqSchema && (
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
+  )}
 </head>
 <body>
   <Navbar />
@@ -59,5 +225,6 @@ const {
     <slot />
   </main>
   <Footer />
+  <WhatsAppButton />
 </body>
 </html>

@@ -1,16 +1,18 @@
 ---
 import Base from '../layouts/Base.astro';
 
-// IMPORTANTE: este es un texto base inicial. Antes de publicar
-// definitivamente, debe ser revisado y ajustado por un asesor jurídico.
-// Edita los datos de la empresa (nombre, NIT, dirección) según los reales.
+// Texto base de Términos y Condiciones. Antes de publicidad masiva o
+// contratos enterprise, conviene revisión adicional por asesor jurídico
+// para cláusulas específicas a tu medida (SLA, garantías, etc.).
 const COMPANY = {
   name: 'Emprenddi',
-  legal: 'Tecmax SAS',           // EDITAR con razón social real
-  nit: '900.000.000-0',          // EDITAR con NIT real
-  city: 'Bogotá D.C., Colombia', // EDITAR
+  legal: 'Tecmax SAS',
+  nit: '900.642.123-7',
+  address: 'Carrera 15 #78-33, Locales 2-255 y 2-211, Centro Comercial Unilago',
+  city: 'Bogotá D.C., Colombia',
   email: 'comercial@emprenddi.com',
-  updated: '23 de mayo de 2026',
+  phone: '+57 314 440 5766',
+  updated: '25 de mayo de 2026',
 };
 
 const secciones = [
@@ -57,8 +59,8 @@ const secciones = [
         Estos Términos y Condiciones regulan el acceso y uso de la
         plataforma <strong>{COMPANY.name}</strong>, operada por
         <strong>{COMPANY.legal}</strong> (NIT {COMPANY.nit}), con domicilio
-        en {COMPANY.city}. Al crear una cuenta o utilizar el servicio,
-        el usuario declara haberlos leído y aceptado.
+        en {COMPANY.address}, {COMPANY.city}. Al crear una cuenta o
+        utilizar el servicio, el usuario declara haberlos leído y aceptado.
       </p>
 
       <div class="space-y-7">

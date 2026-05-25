@@ -20,14 +20,9 @@ const cols = [
       { href: '/privacidad', label: 'Política de privacidad' },
     ],
   },
-  {
-    title: 'Contacto',
-    links: [
-      { href: 'mailto:comercial@emprenddi.com', label: 'comercial@emprenddi.com' },
-      { href: '/contacto', label: 'Solicitar demo' },
-    ],
-  },
 ];
+
+const WA_URL = 'https://wa.me/573144405766?text=' + encodeURIComponent('Hola, quiero más información sobre Emprenddi.');
 ---
 
 <footer class="bg-slate-900 text-slate-300">
@@ -56,12 +51,46 @@ const cols = [
           </ul>
         </div>
       ))}
+
+      <!-- Contacto -->
+      <div>
+        <h3 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Contacto</h3>
+        <address class="not-italic text-sm text-slate-400 space-y-2.5">
+          <div class="flex items-start gap-2">
+            <svg class="w-4 h-4 mt-0.5 text-slate-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+            </svg>
+            <a href="https://maps.google.com/?q=Carrera%2015%20%2378-33%20Unilago%20Bogot%C3%A1"
+               target="_blank" rel="noopener"
+               class="hover:text-white transition leading-snug">
+              Cra 15 #78-33<br />
+              Unilago · Local 2-255 / 2-211<br />
+              Bogotá D.C.
+            </a>
+          </div>
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="currentColor" viewBox="0 0 32 32"><path d="M16.001 0C7.165 0 .003 7.163.003 16c0 2.823.737 5.585 2.137 8.012L.001 32l8.181-2.143A15.92 15.92 0 0 0 16.001 32C24.838 32 32 24.837 32 16S24.838 0 16.001 0zm7.319 20.351c-.401-.2-2.372-1.169-2.74-1.303-.367-.134-.634-.2-.901.2-.267.401-1.034 1.302-1.268 1.569-.234.267-.467.301-.868.1-.401-.2-1.692-.624-3.224-1.989-1.192-1.063-1.995-2.376-2.229-2.777-.234-.401-.025-.617.175-.817.18-.18.401-.467.601-.7.2-.234.267-.401.401-.668.134-.267.067-.501-.033-.701-.1-.2-.901-2.174-1.235-2.978-.325-.782-.656-.677-.901-.689-.234-.012-.501-.014-.768-.014a1.47 1.47 0 0 0-1.069.501c-.367.401-1.402 1.37-1.402 3.343s1.435 3.879 1.635 4.146c.2.267 2.824 4.314 6.842 6.05.957.413 1.703.659 2.285.844.96.305 1.835.262 2.526.159.771-.115 2.372-.969 2.706-1.905.334-.937.334-1.738.234-1.905-.1-.167-.367-.267-.768-.467z"/></svg>
+            <a href={WA_URL} target="_blank" rel="noopener noreferrer" class="hover:text-white transition">
+              +57 314 440 5766
+            </a>
+          </div>
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-slate-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+            </svg>
+            <a href="mailto:comercial@emprenddi.com" class="hover:text-white transition break-all">
+              comercial@emprenddi.com
+            </a>
+          </div>
+        </address>
+      </div>
     </div>
 
     <!-- Bottom -->
-    <div class="mt-12 pt-8 border-t border-slate-800 text-center sm:text-left flex flex-col sm:flex-row gap-4 justify-between items-center text-sm text-slate-500">
+    <div class="mt-12 pt-8 border-t border-slate-800 flex flex-col sm:flex-row gap-4 justify-between items-center text-sm text-slate-500 text-center sm:text-left">
       <div>
-        © {year} Emprenddi · Hecho en Colombia 🇨🇴
+        © {year} <strong class="text-slate-300">Tecmax SAS</strong> · NIT 900.642.123-7 · Hecho en Colombia 🇨🇴
       </div>
       <div class="flex items-center gap-4">
         <a href="/terminos" class="hover:text-slate-300 transition">Términos</a>
