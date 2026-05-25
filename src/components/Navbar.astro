@@ -4,7 +4,7 @@ const navLinks = [
   { href: '/#features', label: 'Funcionalidades' },
   { href: '/restaurantes', label: 'Restaurantes' },
   { href: '/precios', label: 'Precios' },
-  { href: '/docs/', label: 'Ayuda' },
+  { href: '/docs/', label: 'Documentación' },
   { href: '/blog', label: 'Blog' },
   { href: '/contacto', label: 'Contacto' },
 ];
@@ -18,9 +18,9 @@ const navLinks = [
     </a>
 
     <!-- Links desktop -->
-    <ul class="hidden md:flex items-center gap-1">
+    <ul class="hidden md:flex items-center gap-1 list-none m-0 p-0">
       {navLinks.map(({ href, label }) => (
-        <li>
+        <li class="list-none">
           <a
             href={href}
             class="px-4 py-2 text-sm font-medium text-slate-700 hover:text-brand-600 transition"
@@ -62,9 +62,9 @@ const navLinks = [
 
   <!-- Mobile menu -->
   <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 bg-white">
-    <ul class="container-narrow py-3 flex flex-col gap-1">
+    <ul class="container-narrow py-3 flex flex-col gap-1 list-none m-0 p-0">
       {navLinks.map(({ href, label }) => (
-        <li>
+        <li class="list-none">
           <a
             href={href}
             class="block px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 rounded-md"
@@ -73,7 +73,7 @@ const navLinks = [
           </a>
         </li>
       ))}
-      <li class="pt-2 mt-1 border-t border-slate-100">
+      <li class="list-none pt-2 mt-1 border-t border-slate-100">
         <a
           href={APP_URL + '/login'}
           class="block px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 rounded-md"

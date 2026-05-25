@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Reset list-style fuera de @layer para que tenga mas prioridad y NO
+   pueda ser sobrescrito por otros CSS layered (como starlight-tailwind).
+   Necesario porque applyBaseStyles:false desactiva el preflight de Tailwind.
+   El contenido de Starlight (.sl-markdown-content) reaplica bullets en docs.css. */
+header ul, header ol,
+footer ul, footer ol,
+nav ul, nav ol {
+  list-style: none !important;
+  margin: 0;
+  padding: 0;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -9,15 +21,6 @@
   }
   body {
     @apply bg-white text-slate-900 font-sans antialiased;
-  }
-  /* Reset minimo — applyBaseStyles:false en la integracion Tailwind desactiva
-     el preflight global, asi que reponemos lo esencial para que la navbar/footer
-     no muestren bullets nativos del <ul>. No afecta al sidebar/contenido de
-     Starlight porque su CSS tiene mayor especificidad. */
-  ul, ol {
-    list-style: none;
-    margin: 0;
-    padding: 0;
   }
 }
 

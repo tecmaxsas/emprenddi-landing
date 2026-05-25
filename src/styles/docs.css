@@ -1,51 +1,24 @@
 /* Personalización del tema Starlight para que coincida con el branding
-   Emprenddi (violeta / indigo). Aplica solo en /docs/* gracias a la
-   especificidad del data-theme de Starlight. */
+   Emprenddi (violeta / indigo).
+
+   IMPORTANTE: solo sobrescribimos los colores de ACENTO (--sl-color-accent-*).
+   NO tocamos --sl-color-gray-*, --sl-color-white ni --sl-color-black porque
+   esos son los que dan contraste entre texto y fondo. Una mala paleta ahi
+   hace que el texto se vea palido o ilegible. */
 
 :root {
-  /* Acentos: Starlight expone variables CSS — reemplazamos al violeta */
+  /* Solo acentos — el resto se queda en defaults de Starlight */
   --sl-color-accent-low: #312e81;
-  --sl-color-accent: #4f46e5;
+  --sl-color-accent: #6366f1;
   --sl-color-accent-high: #c7d2fe;
 
-  --sl-color-white: #ffffff;
-  --sl-color-gray-1: #eef2ff;
-  --sl-color-gray-2: #c7d2fe;
-  --sl-color-gray-3: #818cf8;
-  --sl-color-gray-4: #4338ca;
-  --sl-color-gray-5: #312e81;
-  --sl-color-gray-6: #1e1b4b;
-  --sl-color-black: #0f0a2e;
-
-  --sl-font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --sl-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 :root[data-theme='light'] {
   --sl-color-accent-low: #e0e7ff;
   --sl-color-accent: #4f46e5;
   --sl-color-accent-high: #312e81;
-
-  --sl-color-white: #0f172a;
-  --sl-color-gray-1: #1e293b;
-  --sl-color-gray-2: #334155;
-  --sl-color-gray-3: #64748b;
-  --sl-color-gray-4: #94a3b8;
-  --sl-color-gray-5: #cbd5e1;
-  --sl-color-gray-6: #f1f5f9;
-  --sl-color-black: #ffffff;
-}
-
-/* Cards estilo "centro de ayuda" para la página inicio de docs */
-.card-grid-help {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: 1fr;
-}
-@media (min-width: 50rem) {
-  .card-grid-help { grid-template-columns: repeat(2, 1fr); }
-}
-@media (min-width: 72rem) {
-  .card-grid-help { grid-template-columns: repeat(3, 1fr); }
 }
 
 /* Pequeño ajuste: la tabla de contenidos lateral es más legible con
@@ -60,14 +33,62 @@ starlight-toc nav ul { font-size: 0.875rem; }
 .sl-markdown-content ul:not(:where(.not-content *)) {
   list-style: disc;
   padding-left: 1.5em;
+  margin-block: 1em;
 }
 .sl-markdown-content ol:not(:where(.not-content *)) {
   list-style: decimal;
   padding-left: 1.5em;
+  margin-block: 1em;
 }
 .sl-markdown-content ul ul:not(:where(.not-content *)) {
   list-style: circle;
 }
 .sl-markdown-content ul ul ul:not(:where(.not-content *)) {
   list-style: square;
+}
+.sl-markdown-content li:not(:where(.not-content *)) {
+  margin-block: 0.25em;
+}
+
+/* Mejor contraste en links del contenido (color violeta accesible). */
+.sl-markdown-content a:not(:where(.not-content *)) {
+  color: var(--sl-color-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.sl-markdown-content a:hover:not(:where(.not-content *)) {
+  text-decoration-thickness: 2px;
+}
+
+/* Codigo inline mas visible. */
+.sl-markdown-content code:not(:where(pre code, .not-content *)) {
+  background: var(--sl-color-gray-6);
+  padding: 0.15em 0.4em;
+  border-radius: 0.3em;
+  font-size: 0.9em;
+}
+
+/* Tablas: mas legibles, bordes suaves, header destacado. */
+.sl-markdown-content table:not(:where(.not-content *)) {
+  width: 100%;
+  border-collapse: collapse;
+  margin-block: 1.5em;
+}
+.sl-markdown-content th:not(:where(.not-content *)),
+.sl-markdown-content td:not(:where(.not-content *)) {
+  padding: 0.6em 0.8em;
+  border: 1px solid var(--sl-color-gray-5);
+  text-align: left;
+}
+.sl-markdown-content th:not(:where(.not-content *)) {
+  background: var(--sl-color-gray-6);
+  font-weight: 600;
+}
+
+/* Heading H2 con borde inferior para separar secciones. */
+.sl-markdown-content h2:not(:where(.not-content *)) {
+  border-bottom: 1px solid var(--sl-color-gray-5);
+  padding-bottom: 0.3em;
+  margin-top: 2em;
 }
