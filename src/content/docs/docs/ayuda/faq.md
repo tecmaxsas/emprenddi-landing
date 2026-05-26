@@ -177,6 +177,24 @@ Sí. Configurable por empleado.
 
 Sí. Tickets de garantía con tracking de estado, técnico asignado, costos, fechas. [Ver Garantías](/docs/garantias/tickets-garantia/).
 
+## Promociones y Gift Cards
+
+### ¿Maneja descuentos automáticos tipo 2x1, happy hour?
+
+Sí. Módulo opcional de **Promociones** con tipos: porcentaje, monto fijo, 2x1 (BOGO), volumen escalonado, combos, happy hour (con días + rango horario). Se aplican solas en POS cuando se cumplen las condiciones. [Ver Promociones](/docs/ventas/promociones/).
+
+### ¿Soporta cupones con código?
+
+Sí. Cupones con código que el cliente ingresa en POS (ej. `BIENVENIDO10`). Configurables con límites: uso total + por cliente, fecha de vigencia. [Más info](/docs/ventas/promociones/).
+
+### ¿Puedo vender tarjetas regalo (gift cards)?
+
+Sí. Módulo opcional de **Gift Cards**: vendes bonos con monto variable, generan código único, el destinatario los redime en POS como medio de pago. Funciona en POS tradicional y restaurante. [Ver Gift Cards](/docs/ventas/gift-cards/).
+
+### ¿Cómo se contabilizan las gift cards?
+
+Como pasivo (cuenta 240825 Anticipos recibidos por defecto, configurable). Al emitir: DR Caja / CR Pasivo Gift Card. Al redimir: DR Pasivo Gift Card / CR Ventas. El reporte muestra "En circulación" para conciliar con la cuenta contable.
+
 ## Soporte y entrenamiento
 
 ### ¿Ofrecen capacitación?
