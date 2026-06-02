@@ -7,6 +7,8 @@ sidebar:
 
 Emprenddi genera todos los **reportes contables oficiales** que la DIAN exige y los **reportes operativos** que necesitas para tomar decisiones.
 
+> Los **estados financieros bajo NIIF** (Estado de Resultados, Balance General e Indicadores Financieros), con exportación a Excel y PDF, tienen su propia página: [Estados Financieros e Indicadores](/docs/contabilidad/estados-financieros/).
+
 ## Acceso
 
 Panel App → **Contabilidad** → **Reportes**.
