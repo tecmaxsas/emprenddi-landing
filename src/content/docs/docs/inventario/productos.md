@@ -28,7 +28,7 @@ Panel App → **Inventario** → **Productos**.
 - **Marca**: para reportes ABC
 - **Nombre**: lo que ve el cajero
 - **Descripción**: detalle largo (opcional, sale en facturas)
-- **Categoría**: organización y routing impresoras (restaurante)
+- **Categoría**: organización, routing impresoras (restaurante) y **cuentas contables por defecto** que hereda el producto (ver [Categorías → Cuentas contables](/docs/inventario/categorias/#cuentas-contables-por-defecto))
 - **Tipo**:
   - `good` — bien físico que se compra y vende
   - `service` — servicio (no controla inventario)
@@ -50,18 +50,27 @@ Panel App → **Inventario** → **Productos**.
 - **Precio de venta default**: el que aparece en POS
 - **Precio incluye IVA**: si manejas precios "ya con IVA", marcar ON. El sistema desnormaliza al guardar.
 - **Precio mínimo de venta** (opcional): para que el cajero no pueda bajar por debajo
-- **Impuesto de venta default**: IVA-19, IVA-5, etc.
+- **Impuesto de venta default**: IVA 19%, IVA 5%, exento, etc. Se configura **por producto** (no se hereda de la categoría) porque dentro de un mismo grupo pueden coexistir tasas distintas.
 - **Impuesto de compra default**: el que típicamente te cobran al comprar
 
-### 4. Tab Cuentas contables
+### 4. Tab Cuentas contables — Opcional (override)
 
-Solo si difieren de las default del PUC:
+Las cuentas contables ya **vienen heredadas de la categoría** del producto. Este tab te permite **sobrescribirlas** solo si este producto puntual necesita cuentas distintas a las del resto de su categoría.
 
-- **Cuenta de inventario** (default 1435)
-- **Cuenta de venta** (default 4135)
-- **Cuenta de costo** (default 6135)
+| Campo | Si lo dejas vacío | Si lo configuras |
+|---|---|---|
+| **Cuenta de inventario** | Hereda de la categoría (cascada → padre → 1435 default) | Usa la cuenta que pongas, ignora la categoría |
+| **Cuenta de venta** | Hereda de la categoría (→ 4135 default) | Usa la cuenta que pongas |
+| **Cuenta de costo** | Hereda de la categoría (→ 6135 default) | Usa la cuenta que pongas |
 
-Útil cuando quieres separar líneas de negocio: por ejemplo, "Pizzas" usa la cuenta de venta `413505-01 Pizzas` y "Bebidas" usa `413505-02 Bebidas`. Así los reportes salen ya desagregados.
+El formulario muestra debajo de cada select el valor que **heredaría** si lo dejaras vacío — útil para confirmar antes de override.
+
+**Cuándo override (poco frecuente):**
+- Un producto "promocional" dentro de la categoría "Comercio" que debe ir a una cuenta de venta especial.
+- Un servicio dentro de una categoría mixta.
+- Migración desde un sistema viejo donde un SKU específico apuntaba a otra cuenta.
+
+**El 99% de las veces déjalo vacío** y configura las cuentas a nivel categoría — más fácil de mantener y de auditar. Ver [Categorías → Cuentas contables](/docs/inventario/categorias/#cuentas-contables-por-defecto).
 
 ### 5. Tab Sedes (multi-sede)
 
