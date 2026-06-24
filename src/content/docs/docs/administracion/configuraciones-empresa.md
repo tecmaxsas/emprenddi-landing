@@ -63,13 +63,17 @@ Para **facturas DIAN** y **POS DIAN** los números vienen de la **resolución** 
 
 ### 6. POS
 
+- **Tipo de factura por defecto**: **POS** (no electrónica) o **Electrónica** (DIAN). El POS abre con esta opción seleccionada en cada venta; el cajero igual puede cambiarla manualmente al cobrar. Útil para empresas que **solo facturan electrónicamente** y quieren evitar el clic adicional en cada venta.
 - **Solicitar cliente en cada venta**: sí / no
 - **Cliente genérico** (predeterminado cuando no se selecciona)
 - **Permitir venta sin stock**: sí / no
 - **Permitir descuentos**: sí / no
 - **Tope máximo de descuento** sin autorización (ej. 10%)
-- **Solicitar autorización para devoluciones**: sí / no
-- **Forma de pago por defecto**: efectivo / tarjeta / mixto
+- **Permitir modificar precio en el carrito**: sí / no
+- **Permitir modificar / agregar impuesto por línea**: sí / no
+- **Imprimir ticket automáticamente al cerrar venta**: sí / no
+- **Propina sugerida (%)**: 0 = desactivada
+- **Cierre de caja oculto**: el cajero no ve el monto esperado al cerrar turno (detecta diferencias sin sesgar)
 
 ### 7. DIAN
 
